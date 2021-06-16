@@ -1,9 +1,0 @@
-hashcat (v5.1.0) starting in benchmark mode...
-
-[33mBenchmarking uses hand-optimized kernel code by default.[0m
-[33mYou can use it in your cracking session by setting the -O option.[0m
-[33mNote: Using optimized kernel code limits the maximum supported password length.[0m
-[33mTo disable the optimized kernel code in benchmark mode, use the -w option.[0m
-[33m[0m
-Started: Wed Jun 16 20:15:46 2021
-[2KStopped: Wed Jun 16 20:15:46 2021

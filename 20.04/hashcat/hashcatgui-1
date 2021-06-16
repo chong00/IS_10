@@ -5,5 +5,5 @@ hashcat (v5.1.0) starting in benchmark mode...
 [33mNote: Using optimized kernel code limits the maximum supported password length.[0m
 [33mTo disable the optimized kernel code in benchmark mode, use the -w option.[0m
 [33m[0m
-Started: Wed Jun 16 18:03:03 2021
-[2KStopped: Wed Jun 16 18:03:03 2021
+Started: Wed Jun 16 18:05:10 2021
+[2KStopped: Wed Jun 16 18:05:10 2021

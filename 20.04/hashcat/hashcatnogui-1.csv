@@ -1,0 +1,208 @@
+Hashmode: 0 - MD5
+
+#1,29120.9 MH/s
+#2,29420.8 MH/s
+#3,28790.1 MH/s
+#4,29455.2 MH/s
+#*,116.8 GH/s
+
+Hashmode: 100 - SHA1
+
+#1,11021.0 MH/s
+#2,11234.0 MH/s
+#3,10928.2 MH/s
+#4,11129.2 MH/s
+#*,44312.3 MH/s
+
+Hashmode: 1400 - SHA2-256
+
+#1,4057.6 MH/s
+#2,4147.7 MH/s
+#3,4030.2 MH/s
+#4,4111.5 MH/s
+#*,16346.9 MH/s
+
+Hashmode: 1700 - SHA2-512
+
+#1,1349.0 MH/s
+#2,1367.7 MH/s
+#3,1330.8 MH/s
+#4,1362.8 MH/s
+#*,5410.3 MH/s
+
+Hashmode: 2500 - WPA-EAPOL-PBKDF2 (Iterations: 4096)
+
+#1,521.3 kH/s
+#2,527.2 kH/s
+#3,511.1 kH/s
+#4,527.5 kH/s
+#*,2087.1 kH/s
+
+Hashmode: 1000 - NTLM
+
+#1,48306.2 MH/s
+#2,48693.0 MH/s
+#3,47642.3 MH/s
+#4,48606.7 MH/s
+#*,193.2 GH/s
+
+Hashmode: 3000 - LM
+
+#1,28038.2 MH/s
+#2,28405.2 MH/s
+#3,27848.8 MH/s
+#4,28202.7 MH/s
+#*,112.5 GH/s
+
+Hashmode: 5500 - NetNTLMv1 / NetNTLMv1+ESS
+
+#1,28991.4 MH/s
+#2,29412.6 MH/s
+#3,28684.1 MH/s
+#4,29282.9 MH/s
+#*,116.4 GH/s
+
+Hashmode: 5600 - NetNTLMv2
+
+#1,2192.3 MH/s
+#2,2198.6 MH/s
+#3,2175.6 MH/s
+#4,2210.2 MH/s
+#*,8776.6 MH/s
+
+Hashmode: 1500 - descrypt, DES (Unix), Traditional DES
+
+
+
+
+
+
+
+
+
+#1,1216.7 MH/s
+#2,1230.1 MH/s
+#3,1204.3 MH/s
+#4,1214.6 MH/s
+#*,4865.7 MH/s
+
+Hashmode: 500 - md5crypt, MD5 (Unix), Cisco-IOS $1$ (MD5) (Iterations: 1000)
+
+#1,11215.3 kH/s
+#2,11377.7 kH/s
+#3,11177.9 kH/s
+#4,11252.2 kH/s
+#*,45023.0 kH/s
+
+Hashmode: 3200 - bcrypt $2*$, Blowfish (Unix) (Iterations: 32)
+
+#1,21061 H/s
+#2,21065 H/s
+#3,20771 H/s
+#4,21189 H/s
+#*,84086 H/s
+
+Hashmode: 1800 - sha512crypt $6$, SHA512 (Unix) (Iterations: 5000)
+
+#1,193.5 kH/s
+#2,193.0 kH/s
+#3,190.9 kH/s
+#4,196.3 kH/s
+#*,773.7 kH/s
+
+Hashmode: 7500 - Kerberos 5 AS-REQ Pre-Auth etype 23
+
+#1,416.0 MH/s
+#2,416.3 MH/s
+#3,410.2 MH/s
+#4,428.4 MH/s
+#*,1670.9 MH/s
+
+Hashmode: 13100 - Kerberos 5 TGS-REP etype 23
+
+#1,414.8 MH/s
+#2,415.5 MH/s
+#3,410.1 MH/s
+#4,424.4 MH/s
+#*,1664.8 MH/s
+
+Hashmode: 15300 - DPAPI masterkey file v1 (Iterations: 23999)
+
+#1,93596 H/s
+#2,94332 H/s
+#3,92244 H/s
+#4,94435 H/s
+#*,374.6 kH/s
+
+Hashmode: 15900 - DPAPI masterkey file v2 (Iterations: 7999)
+
+#1,55004 H/s
+#2,55104 H/s
+#3,54329 H/s
+#4,56452 H/s
+#*,220.9 kH/s
+
+Hashmode: 7100 - macOS v10.8+ (PBKDF2-SHA512) (Iterations: 35000)
+
+#1,16653 H/s
+#2,16907 H/s
+#3,16448 H/s
+#4,16847 H/s
+#*,66856 H/s
+
+Hashmode: 11600 - 7-Zip (Iterations: 524288)
+
+#1,11158 H/s
+#2,11209 H/s
+#3,10987 H/s
+#4,11497 H/s
+#*,44851 H/s
+
+Hashmode: 12500 - RAR3-hp (Iterations: 262144)
+
+#1,50792 H/s
+#2,50847 H/s
+#3,47348 H/s
+#4,47593 H/s
+#*,196.6 kH/s
+
+Hashmode: 13000 - RAR5 (Iterations: 32767)
+
+#1,47581 H/s
+#2,48226 H/s
+#3,47151 H/s
+#4,47940 H/s
+#*,190.9 kH/s
+
+Hashmode: 6211 - TrueCrypt PBKDF2-HMAC-RIPEMD160 + XTS 512 bit (Iterations: 2000)
+
+#1,328.8 kH/s
+#2,328.7 kH/s
+#3,325.0 kH/s
+#4,329.6 kH/s
+#*,1312.1 kH/s
+
+Hashmode: 13400 - KeePass 1 (AES/Twofish) and KeePass 2 (AES) (Iterations: 6000)
+
+#1,181.0 kH/s
+#2,183.0 kH/s
+#3,175.9 kH/s
+#4,179.4 kH/s
+#*,719.2 kH/s
+
+Hashmode: 6800 - LastPass + LastPass sniffed (Iterations: 500)
+
+#1,2906.3 kH/s
+#2,2937.4 kH/s
+#3,2888.3 kH/s
+#4,2928.0 kH/s
+#*,11660.0 kH/s
+
+Hashmode: 11300 - Bitcoin/Litecoin wallet.dat (Iterations: 199999)
+
+#1,5789 H/s
+#2,5865 H/s
+#3,5735 H/s
+#4,5838 H/s
+#*,23227 H/s
+

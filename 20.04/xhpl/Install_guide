@@ -20,6 +20,12 @@ Move xhpl executable to is10 dir & copy HPL.dat
 	mv bin/CUDA/xhpl bin/is10/xhpl
 	cp bin/CUDA/HPL.dat bin/is10/HPL.dat
 
-Go to is10 dir and run the benchmark
+Go to is10 dir
 	cd bin/is10
+
+Link the libraries
+	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/is-10/Desktop/IS_10/20.04/xhpl/hpl-2.0_FERMI_v15/src/cuda
+	ldd xhpl
+
+Run the benchmark
 	mpirun -np 4 xhpl

@@ -22,3 +22,5 @@ docker run --gpus all ${CONT} \
   --xhpl-ai --cpu-affinity 0:2:4:6:8:10:12:14 \
   --cpu-cores-per-rank 1 --gpu-affinity 0:0:0:0:0:0:0:0 \
   --dat /workspace/hpl-ai-linux-x86_64/sample-dat/HPL-dgx-a100-1N.dat
+------------------------------------------------------------
+sudo docker run --gpus all -v ${MOUNT} ${CONT}  mpirun --bind-to none -np 8 --use-hwthread-cpus hpl.sh   --xhpl-ai --cpu-affinity 0:0:2:2:4:4:6:6   --cpu-cores-per-rank 1 --gpu-affinity 0:0:1:1:2:2:3:3   --dat /my-dat-files/hpl.dat

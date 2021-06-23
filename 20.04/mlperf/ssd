@@ -1,0 +1,1 @@
+docker run -it --rm -v /coco/coco2017:/data/coco2017 --gpus all --priviledged --ipc=host mlperf-nvidia:single_stage_detector 

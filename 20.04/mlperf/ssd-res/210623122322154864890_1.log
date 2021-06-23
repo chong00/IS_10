@@ -4648,3 +4648,5 @@ Iteration:  15500, Loss function: 3.922, Average Loss: 4.352
 Iteration:  15600, Loss function: 4.289, Average Loss: 4.351
 Iteration:  15700, Loss function: 3.656, Average Loss: 4.345
 Iteration:  15800, Loss function: 4.489, Average Loss: 4.341
+Iteration:  15900, Loss function: 4.366, Average Loss: 4.338
+Iteration:  16000, Loss function: 4.413, Average Loss: 4.330

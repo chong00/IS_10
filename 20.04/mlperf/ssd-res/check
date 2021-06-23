@@ -1,7 +1,7 @@
 #!/bin/bash
 
 while true; do
-    sleep 1m
+    sleep 1h
     cp * /home/is-10/Desktop/IS_10/20.04/mlperf/ssd-res
     cd /home/is-10/Desktop/IS_10/20.04/mlperf/ssd-res
     git pull

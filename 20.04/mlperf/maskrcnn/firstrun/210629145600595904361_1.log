@@ -1,0 +1,5367 @@
++ echo 'Beginning trial 1 of 5'
+Beginning trial 1 of 5
++ docker exec -it object_detection python -c '
+from mlperf_logging.mllog import constants
+from maskrcnn_benchmark.utils.mlperf_logger import log_event
+log_event(constants.MASKRCNN)'
+:::MLLOG {"namespace": "", "time_ms": 1624949762142, "event_type": "POINT_IN_TIME", "key": "maskrcnn", "value": null, "metadata": {"file": "<string>", "lineno": 4}}
++ '[' 1 -eq 1 ']'
++ sync
++ sudo /sbin/sysctl vm.drop_caches=3
+vm.drop_caches = 3
++ docker exec -it object_detection python -c '
+from mlperf_logging.mllog import constants
+from maskrcnn_benchmark.utils.mlperf_logger import log_event
+log_event(key=constants.CACHE_CLEAR, value=True, stack_offset=0)'
+:::MLLOG {"namespace": "", "time_ms": 1624949765050, "event_type": "POINT_IN_TIME", "key": "cache_clear", "value": true, "metadata": {"file": "/opt/conda/lib/python3.6/site-packages/mlperf_logging/mllog/mllog.py", "lineno": 261}}
++ docker exec -it --env=DGXHT --env=DGXNGPU --env=DGXNNODES --env=DGXNSOCKET --env=DGXSOCKETCORES --env=DGXSYSTEM --env=EXTRA_CONFIG --env=EXTRA_PARAMS --env=WALLTIME --env=MLPERF_HOST_OS object_detection ./run_and_time.sh
+STARTING TIMING RUN AT 2021-06-29 06:56:05 AM
++ echo 'running benchmark'
+running benchmark
++ DATASET_DIR=/data
++ ln -sTf /data/coco2017 /coco
+++ ls /data
++ echo coco2017 results
+coco2017 results
++ declare -a CMD
++ '[' -n '' ']'
++ CMD=('python' '-u' '-m' 'bind_launch' "--nsockets_per_node=${DGXNSOCKET}" "--ncores_per_socket=${DGXSOCKETCORES}" "--nproc_per_node=${DGXNGPU}")
++ python -u -m bind_launch --nsockets_per_node=1 --ncores_per_socket=6 --nproc_per_node=4 tools/train_mlperf.py --config-file configs/e2e_mask_rcnn_R_50_FPN_1x.yaml DTYPE float16 PATHS_CATALOG maskrcnn_benchmark/config/paths_catalog_dbcluster.py MODEL.WEIGHT /coco/models/R-50.pkl DISABLE_REDUCED_LOGGING True SOLVER.BASE_LR 0.06 SOLVER.MAX_ITER 400 SOLVER.WARMUP_FACTOR 0.000096 SOLVER.WARMUP_ITERS 625 SOLVER.WARMUP_METHOD mlperf_linear SOLVER.STEPS '(24000,32000)' SOLVER.IMS_PER_BATCH 24 TEST.IMS_PER_BATCH 8 MODEL.RPN.FPN_POST_NMS_TOP_N_TRAIN 6000 NHWC True
+:::MLLOG {"namespace": "", "time_ms": 1624949767272, "event_type": "INTERVAL_START", "key": "init_start", "value": null, "metadata": {"file": "tools/train_mlperf.py", "lineno": 264}}
+:::MLLOG {"namespace": "", "time_ms": 1624949767272, "event_type": "INTERVAL_START", "key": "init_start", "value": null, "metadata": {"file": "tools/train_mlperf.py", "lineno": 264}}
+:::MLLOG {"namespace": "", "time_ms": 1624949767273, "event_type": "INTERVAL_START", "key": "init_start", "value": null, "metadata": {"file": "tools/train_mlperf.py", "lineno": 264}}
+:::MLLOG {"namespace": "", "time_ms": 1624949767272, "event_type": "INTERVAL_START", "key": "init_start", "value": null, "metadata": {"file": "tools/train_mlperf.py", "lineno": 264}}
+:::MLLOG {"namespace": "", "time_ms": 1624949770565, "event_type": "POINT_IN_TIME", "key": "seed", "value": 967553792, "metadata": {"file": "tools/train_mlperf.py", "lineno": 318}}
+2021-06-29 06:56:10,572 maskrcnn_benchmark INFO: Using 4 GPUs
+2021-06-29 06:56:10,572 maskrcnn_benchmark INFO: Namespace(config_file='configs/e2e_mask_rcnn_R_50_FPN_1x.yaml', distributed=True, local_rank=0, opts=['DTYPE', 'float16', 'PATHS_CATALOG', 'maskrcnn_benchmark/config/paths_catalog_dbcluster.py', 'MODEL.WEIGHT', '/coco/models/R-50.pkl', 'DISABLE_REDUCED_LOGGING', 'True', 'SOLVER.BASE_LR', '0.06', 'SOLVER.MAX_ITER', '400', 'SOLVER.WARMUP_FACTOR', '0.000096', 'SOLVER.WARMUP_ITERS', '625', 'SOLVER.WARMUP_METHOD', 'mlperf_linear', 'SOLVER.STEPS', '(24000,32000)', 'SOLVER.IMS_PER_BATCH', '24', 'TEST.IMS_PER_BATCH', '8', 'MODEL.RPN.FPN_POST_NMS_TOP_N_TRAIN', '6000', 'NHWC', 'True'], seed=967553792)
+2021-06-29 06:56:10,573 maskrcnn_benchmark INFO: Worker 0: Setting seed 2585893385
+2021-06-29 06:56:10,573 maskrcnn_benchmark INFO: Collecting env info (might take some time)
+2021-06-29 06:56:13,769 maskrcnn_benchmark INFO: 
+PyTorch version: 1.6.0a0+9907a3e
+Is debug build: No
+CUDA used to build PyTorch: 11.0
+
+OS: Ubuntu 18.04.4 LTS
+GCC version: (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0
+CMake version: version 3.14.0
+
+Python version: 3.6
+Is CUDA available: Yes
+CUDA runtime version: Could not collect
+GPU models and configuration: 
+GPU 0: NVIDIA GeForce GTX 1080 Ti
+GPU 1: NVIDIA GeForce GTX 1080 Ti
+GPU 2: NVIDIA GeForce GTX 1080 Ti
+GPU 3: NVIDIA GeForce GTX 1080 Ti
+
+Nvidia driver version: 465.19.01
+cuDNN version: Probably one of the following:
+/usr/lib/x86_64-linux-gnu/libcudnn.so.8.0.1
+/usr/lib/x86_64-linux-gnu/libcudnn_adv_infer.so.8.0.1
+/usr/lib/x86_64-linux-gnu/libcudnn_adv_train.so.8.0.1
+/usr/lib/x86_64-linux-gnu/libcudnn_cnn_infer.so.8.0.1
+/usr/lib/x86_64-linux-gnu/libcudnn_cnn_train.so.8.0.1
+/usr/lib/x86_64-linux-gnu/libcudnn_ops_infer.so.8.0.1
+/usr/lib/x86_64-linux-gnu/libcudnn_ops_train.so.8.0.1
+
+Versions of relevant libraries:
+[pip] msgpack-numpy==0.4.3.2
+[pip] numpy==1.17.4
+[pip] pytorch-transformers==1.1.0
+[pip] torch==1.6.0a0+9907a3e
+[pip] torchtext==0.6.0
+[pip] torchvision==0.7.0a0
+[conda] magma-cuda110             2.5.2                         5    local
+[conda] mkl                       2019.1                      144  
+[conda] mkl-include               2019.1                      144  
+[conda] msgpack-numpy             0.4.3.2                  py36_0  
+[conda] nomkl                     3.0                           0  
+[conda] numpy                     1.17.4           py36hd5be1e1_0  
+[conda] numpy-base                1.17.4           py36h2f8d375_0  
+[conda] pytorch-transformers      1.1.0                    pypi_0    pypi
+[conda] torch                     1.6.0a0+9907a3e          pypi_0    pypi
+[conda] torchtext                 0.6.0                    pypi_0    pypi
+[conda] torchvision               0.7.0a0                  pypi_0    pypi
+        Pillow (5.3.0.post1)
+2021-06-29 06:56:13,770 maskrcnn_benchmark INFO: Loaded configuration file configs/e2e_mask_rcnn_R_50_FPN_1x.yaml
+2021-06-29 06:56:13,770 maskrcnn_benchmark INFO: 
+MODEL:
+  META_ARCHITECTURE: "GeneralizedRCNN"
+  WEIGHT: "catalog://ImageNetPretrained/MSRA/R-50"
+  BACKBONE:
+    CONV_BODY: "R-50-FPN"
+    OUT_CHANNELS: 256
+  RPN:
+    USE_FPN: True
+    ANCHOR_STRIDE: (4, 8, 16, 32, 64)
+    PRE_NMS_TOP_N_TRAIN: 2000
+    PRE_NMS_TOP_N_TEST: 1000
+    POST_NMS_TOP_N_TEST: 1000
+    FPN_POST_NMS_TOP_N_TEST: 1000
+  ROI_HEADS:
+    USE_FPN: True
+  ROI_BOX_HEAD:
+    POOLER_RESOLUTION: 7
+    POOLER_SCALES: (0.25, 0.125, 0.0625, 0.03125)
+    POOLER_SAMPLING_RATIO: 2
+    FEATURE_EXTRACTOR: "FPN2MLPFeatureExtractor"
+    PREDICTOR: "FPNPredictor"
+  ROI_MASK_HEAD:
+    POOLER_SCALES: (0.25, 0.125, 0.0625, 0.03125)
+    FEATURE_EXTRACTOR: "MaskRCNNFPNFeatureExtractor"
+    PREDICTOR: "MaskRCNNC4Predictor"
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 2
+    RESOLUTION: 28
+    SHARE_BOX_FEATURE_EXTRACTOR: False
+  MASK_ON: True
+DATASETS:
+  TRAIN: ("coco_2017_train",)
+  TEST: ("coco_2017_val",)
+DATALOADER:
+  SIZE_DIVISIBILITY: 32
+SOLVER:
+  BASE_LR: 0.02
+  WEIGHT_DECAY: 0.0001
+  STEPS: (60000, 80000)
+  MAX_ITER: 90000
+
+2021-06-29 06:56:13,771 maskrcnn_benchmark INFO: Running with config:
+AMP_VERBOSE: False
+DATALOADER:
+  ASPECT_RATIO_GROUPING: True
+  NUM_WORKERS: 4
+  SIZE_DIVISIBILITY: 32
+DATASETS:
+  TEST: ('coco_2017_val',)
+  TRAIN: ('coco_2017_train',)
+DISABLE_REDUCED_LOGGING: True
+DTYPE: float16
+INPUT:
+  MAX_SIZE_TEST: 1333
+  MAX_SIZE_TRAIN: 1333
+  MIN_SIZE_TEST: 800
+  MIN_SIZE_TRAIN: (800,)
+  PIXEL_MEAN: [102.9801, 115.9465, 122.7717]
+  PIXEL_STD: [1.0, 1.0, 1.0]
+  TO_BGR255: True
+MLPERF:
+  MIN_BBOX_MAP: 0.377
+  MIN_SEGM_MAP: 0.339
+MODEL:
+  BACKBONE:
+    CONV_BODY: R-50-FPN
+    FREEZE_CONV_BODY_AT: 2
+    OUT_CHANNELS: 256
+    USE_GN: False
+  CLS_AGNOSTIC_BBOX_REG: False
+  DEVICE: cuda
+  FPN:
+    USE_GN: False
+    USE_RELU: False
+  GROUP_NORM:
+    DIM_PER_GP: -1
+    EPSILON: 1e-05
+    NUM_GROUPS: 32
+  KEYPOINT_ON: False
+  MASK_ON: True
+  META_ARCHITECTURE: GeneralizedRCNN
+  RESNETS:
+    NUM_GROUPS: 1
+    RES2_OUT_CHANNELS: 256
+    RES5_DILATION: 1
+    STEM_FUNC: StemWithFixedBatchNorm
+    STEM_OUT_CHANNELS: 64
+    STRIDE_IN_1X1: True
+    TRANS_FUNC: BottleneckWithFixedBatchNorm
+    WIDTH_PER_GROUP: 64
+  RETINANET:
+    ANCHOR_SIZES: (32, 64, 128, 256, 512)
+    ANCHOR_STRIDES: (8, 16, 32, 64, 128)
+    ASPECT_RATIOS: (0.5, 1.0, 2.0)
+    BBOX_REG_BETA: 0.11
+    BBOX_REG_WEIGHT: 4.0
+    BG_IOU_THRESHOLD: 0.4
+    FG_IOU_THRESHOLD: 0.5
+    INFERENCE_TH: 0.05
+    LOSS_ALPHA: 0.25
+    LOSS_GAMMA: 2.0
+    NMS_TH: 0.4
+    NUM_CLASSES: 81
+    NUM_CONVS: 4
+    OCTAVE: 2.0
+    PRE_NMS_TOP_N: 1000
+    PRIOR_PROB: 0.01
+    SCALES_PER_OCTAVE: 3
+    STRADDLE_THRESH: 0
+    USE_C5: True
+  RETINANET_ON: False
+  ROI_BOX_HEAD:
+    CONV_HEAD_DIM: 256
+    DILATION: 1
+    FEATURE_EXTRACTOR: FPN2MLPFeatureExtractor
+    MLP_HEAD_DIM: 1024
+    NUM_CLASSES: 81
+    NUM_STACKED_CONVS: 4
+    POOLER_RESOLUTION: 7
+    POOLER_SAMPLING_RATIO: 2
+    POOLER_SCALES: (0.25, 0.125, 0.0625, 0.03125)
+    PREDICTOR: FPNPredictor
+    USE_GN: False
+  ROI_HEADS:
+    BATCH_SIZE_PER_IMAGE: 512
+    BBOX_REG_WEIGHTS: (10.0, 10.0, 5.0, 5.0)
+    BG_IOU_THRESHOLD: 0.5
+    DETECTIONS_PER_IMG: 100
+    FG_IOU_THRESHOLD: 0.5
+    NMS: 0.5
+    POSITIVE_FRACTION: 0.25
+    SCORE_THRESH: 0.05
+    USE_FPN: True
+  ROI_KEYPOINT_HEAD:
+    CONV_LAYERS: (512, 512, 512, 512, 512, 512, 512, 512)
+    FEATURE_EXTRACTOR: KeypointRCNNFeatureExtractor
+    MLP_HEAD_DIM: 1024
+    NUM_CLASSES: 17
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_SCALES: (0.0625,)
+    PREDICTOR: KeypointRCNNPredictor
+    RESOLUTION: 14
+    SHARE_BOX_FEATURE_EXTRACTOR: True
+  ROI_MASK_HEAD:
+    CONV_LAYERS: (256, 256, 256, 256)
+    DILATION: 1
+    FEATURE_EXTRACTOR: MaskRCNNFPNFeatureExtractor
+    MLP_HEAD_DIM: 1024
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 2
+    POOLER_SCALES: (0.25, 0.125, 0.0625, 0.03125)
+    POSTPROCESS_MASKS: False
+    POSTPROCESS_MASKS_THRESHOLD: 0.5
+    PREDICTOR: MaskRCNNC4Predictor
+    RESOLUTION: 28
+    SHARE_BOX_FEATURE_EXTRACTOR: False
+    USE_GN: False
+  RPN:
+    ANCHOR_SIZES: (32, 64, 128, 256, 512)
+    ANCHOR_STRIDE: (4, 8, 16, 32, 64)
+    ASPECT_RATIOS: (0.5, 1.0, 2.0)
+    BATCH_SIZE_PER_IMAGE: 256
+    BG_IOU_THRESHOLD: 0.3
+    FG_IOU_THRESHOLD: 0.7
+    FPN_POST_NMS_TOP_N_TEST: 1000
+    FPN_POST_NMS_TOP_N_TRAIN: 6000
+    MIN_SIZE: 0
+    NMS_THRESH: 0.7
+    POSITIVE_FRACTION: 0.5
+    POST_NMS_TOP_N_TEST: 1000
+    POST_NMS_TOP_N_TRAIN: 2000
+    PRE_NMS_TOP_N_TEST: 1000
+    PRE_NMS_TOP_N_TRAIN: 2000
+    RPN_HEAD: SingleConvRPNHead
+    STRADDLE_THRESH: 0
+    USE_FPN: True
+  RPN_ONLY: False
+  WEIGHT: /coco/models/R-50.pkl
+NHWC: True
+OUTPUT_DIR: .
+PATHS_CATALOG: maskrcnn_benchmark/config/paths_catalog_dbcluster.py
+PER_EPOCH_EVAL: True
+SAVE_CHECKPOINTS: False
+SOLVER:
+  BASE_LR: 0.06
+  BIAS_LR_FACTOR: 2
+  CHECKPOINT_PERIOD: 2500
+  GAMMA: 0.1
+  IMS_PER_BATCH: 24
+  MAX_ITER: 400
+  MOMENTUM: 0.9
+  STEPS: (24000, 32000)
+  WARMUP_FACTOR: 9.6e-05
+  WARMUP_ITERS: 625
+  WARMUP_METHOD: mlperf_linear
+  WEIGHT_DECAY: 0.0001
+  WEIGHT_DECAY_BIAS: 0
+TEST:
+  DETECTIONS_PER_IMG: 100
+  EXPECTED_RESULTS: []
+  EXPECTED_RESULTS_SIGMA_TOL: 4
+  IMS_PER_BATCH: 8
+:::MLLOG {"namespace": "", "time_ms": 1624949773775, "event_type": "POINT_IN_TIME", "key": "global_batch_size", "value": 24, "metadata": {"file": "tools/train_mlperf.py", "lineno": 156}}
+:::MLLOG {"namespace": "", "time_ms": 1624949773775, "event_type": "POINT_IN_TIME", "key": "num_image_candidates", "value": 6000, "metadata": {"file": "tools/train_mlperf.py", "lineno": 157}}
+/opt/conda/lib/python3.6/site-packages/torch/jit/_recursive.py:160: UserWarning: 'downsample' was found in ScriptModule constants,  but it is a non-constant submodule. Consider removing it.
+  " but it is a non-constant {}. Consider removing it.".format(name, hint))
+/opt/conda/lib/python3.6/site-packages/torch/jit/_recursive.py:160: UserWarning: 'downsample' was found in ScriptModule constants,  but it is a non-constant submodule. Consider removing it.
+  " but it is a non-constant {}. Consider removing it.".format(name, hint))
+/opt/conda/lib/python3.6/site-packages/torch/nn/modules/conv.py:1009: UserWarning: _ConvTransposeMixin is a deprecated internal class. Please consider using public APIs.
+  "_ConvTransposeMixin is a deprecated internal class. "
+:::MLLOG {"namespace": "", "time_ms": 1624949774625, "event_type": "POINT_IN_TIME", "key": "opt_name", "value": "sgd_with_momentum", "metadata": {"file": "tools/train_mlperf.py", "lineno": 171}}
+:::MLLOG {"namespace": "", "time_ms": 1624949774625, "event_type": "POINT_IN_TIME", "key": "opt_base_learning_rate", "value": 0.06, "metadata": {"file": "tools/train_mlperf.py", "lineno": 172}}
+:::MLLOG {"namespace": "", "time_ms": 1624949774625, "event_type": "POINT_IN_TIME", "key": "opt_learning_rate_warmup_steps", "value": 625, "metadata": {"file": "tools/train_mlperf.py", "lineno": 173}}
+:::MLLOG {"namespace": "", "time_ms": 1624949774625, "event_type": "POINT_IN_TIME", "key": "opt_learning_rate_warmup_factor", "value": 9.6e-05, "metadata": {"file": "tools/train_mlperf.py", "lineno": 174}}
+:::MLLOG {"namespace": "", "time_ms": 1624949774626, "event_type": "POINT_IN_TIME", "key": "opt_learning_rate_decay_factor", "value": 0.1, "metadata": {"file": "tools/train_mlperf.py", "lineno": 175}}
+:::MLLOG {"namespace": "", "time_ms": 1624949774626, "event_type": "POINT_IN_TIME", "key": "opt_learning_rate_decay_steps", "value": [24000, 32000], "metadata": {"file": "tools/train_mlperf.py", "lineno": 176}}
+:::MLLOG {"namespace": "", "time_ms": 1624949774626, "event_type": "POINT_IN_TIME", "key": "min_image_size", "value": 800, "metadata": {"file": "tools/train_mlperf.py", "lineno": 177}}
+:::MLLOG {"namespace": "", "time_ms": 1624949774626, "event_type": "POINT_IN_TIME", "key": "max_image_size", "value": 1333, "metadata": {"file": "tools/train_mlperf.py", "lineno": 178}}
+2021-06-29 06:56:14,666 maskrcnn_benchmark.utils.checkpoint INFO: Loading checkpoint from /coco/models/R-50.pkl
+/opt/conda/lib/python3.6/site-packages/torch/jit/_recursive.py:160: UserWarning: 'downsample' was found in ScriptModule constants,  but it is a non-constant submodule. Consider removing it.
+  " but it is a non-constant {}. Consider removing it.".format(name, hint))
+/opt/conda/lib/python3.6/site-packages/torch/jit/_recursive.py:160: UserWarning: 'downsample' was found in ScriptModule constants,  but it is a non-constant submodule. Consider removing it.
+  " but it is a non-constant {}. Consider removing it.".format(name, hint))
+2021-06-29 06:56:14,905 maskrcnn_benchmark.utils.c2_model_loading INFO: Remapping C2 weights
+2021-06-29 06:56:14,905 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: conv1_b                         mapped name: conv1.bias
+2021-06-29 06:56:14,905 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: conv1_w                         mapped name: conv1.weight
+2021-06-29 06:56:14,905 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: fc1000_b                        mapped name: fc1000.bias
+2021-06-29 06:56:14,905 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: fc1000_w                        mapped name: fc1000.weight
+2021-06-29 06:56:14,905 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_0_branch1_bn_beta          mapped name: layer1.0.downsample.1.biaseta
+2021-06-29 06:56:14,905 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_0_branch1_bn_gamma         mapped name: layer1.0.downsample.1.gamma
+2021-06-29 06:56:14,905 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_0_branch1_bn_running_mean  mapped name: layer1.0.downsample.1.running.mean
+2021-06-29 06:56:14,905 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_0_branch1_bn_running_var   mapped name: layer1.0.downsample.1.running.var
+2021-06-29 06:56:14,905 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_0_branch1_w                mapped name: layer1.0.downsample.0.weight
+2021-06-29 06:56:14,905 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_0_branch2a_bn_beta         mapped name: layer1.0.bn1.biaseta
+2021-06-29 06:56:14,906 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_0_branch2a_bn_gamma        mapped name: layer1.0.bn1.gamma
+2021-06-29 06:56:14,906 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_0_branch2a_bn_running_mean mapped name: layer1.0.bn1.running.mean
+2021-06-29 06:56:14,906 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_0_branch2a_bn_running_var  mapped name: layer1.0.bn1.running.var
+2021-06-29 06:56:14,906 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_0_branch2a_w               mapped name: layer1.0.conv1.weight
+2021-06-29 06:56:14,906 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_0_branch2b_bn_beta         mapped name: layer1.0.bn2.biaseta
+2021-06-29 06:56:14,906 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_0_branch2b_bn_gamma        mapped name: layer1.0.bn2.gamma
+2021-06-29 06:56:14,906 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_0_branch2b_bn_running_mean mapped name: layer1.0.bn2.running.mean
+2021-06-29 06:56:14,906 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_0_branch2b_bn_running_var  mapped name: layer1.0.bn2.running.var
+2021-06-29 06:56:14,906 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_0_branch2b_w               mapped name: layer1.0.conv2.weight
+2021-06-29 06:56:14,906 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_0_branch2c_bn_beta         mapped name: layer1.0.bn3.biaseta
+2021-06-29 06:56:14,906 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_0_branch2c_bn_gamma        mapped name: layer1.0.bn3.gamma
+2021-06-29 06:56:14,906 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_0_branch2c_bn_running_mean mapped name: layer1.0.bn3.running.mean
+2021-06-29 06:56:14,906 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_0_branch2c_bn_running_var  mapped name: layer1.0.bn3.running.var
+2021-06-29 06:56:14,907 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_0_branch2c_w               mapped name: layer1.0.conv3.weight
+2021-06-29 06:56:14,907 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_1_branch2a_bn_beta         mapped name: layer1.1.bn1.biaseta
+2021-06-29 06:56:14,907 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_1_branch2a_bn_gamma        mapped name: layer1.1.bn1.gamma
+2021-06-29 06:56:14,907 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_1_branch2a_bn_running_mean mapped name: layer1.1.bn1.running.mean
+2021-06-29 06:56:14,907 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_1_branch2a_bn_running_var  mapped name: layer1.1.bn1.running.var
+2021-06-29 06:56:14,907 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_1_branch2a_w               mapped name: layer1.1.conv1.weight
+2021-06-29 06:56:14,907 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_1_branch2b_bn_beta         mapped name: layer1.1.bn2.biaseta
+2021-06-29 06:56:14,907 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_1_branch2b_bn_gamma        mapped name: layer1.1.bn2.gamma
+2021-06-29 06:56:14,907 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_1_branch2b_bn_running_mean mapped name: layer1.1.bn2.running.mean
+2021-06-29 06:56:14,907 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_1_branch2b_bn_running_var  mapped name: layer1.1.bn2.running.var
+2021-06-29 06:56:14,907 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_1_branch2b_w               mapped name: layer1.1.conv2.weight
+2021-06-29 06:56:14,907 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_1_branch2c_bn_beta         mapped name: layer1.1.bn3.biaseta
+2021-06-29 06:56:14,908 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_1_branch2c_bn_gamma        mapped name: layer1.1.bn3.gamma
+2021-06-29 06:56:14,908 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_1_branch2c_bn_running_mean mapped name: layer1.1.bn3.running.mean
+2021-06-29 06:56:14,908 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_1_branch2c_bn_running_var  mapped name: layer1.1.bn3.running.var
+2021-06-29 06:56:14,908 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_1_branch2c_w               mapped name: layer1.1.conv3.weight
+2021-06-29 06:56:14,908 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_2_branch2a_bn_beta         mapped name: layer1.2.bn1.biaseta
+2021-06-29 06:56:14,908 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_2_branch2a_bn_gamma        mapped name: layer1.2.bn1.gamma
+2021-06-29 06:56:14,908 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_2_branch2a_bn_running_mean mapped name: layer1.2.bn1.running.mean
+2021-06-29 06:56:14,908 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_2_branch2a_bn_running_var  mapped name: layer1.2.bn1.running.var
+2021-06-29 06:56:14,908 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_2_branch2a_w               mapped name: layer1.2.conv1.weight
+2021-06-29 06:56:14,908 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_2_branch2b_bn_beta         mapped name: layer1.2.bn2.biaseta
+2021-06-29 06:56:14,908 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_2_branch2b_bn_gamma        mapped name: layer1.2.bn2.gamma
+2021-06-29 06:56:14,908 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_2_branch2b_bn_running_mean mapped name: layer1.2.bn2.running.mean
+2021-06-29 06:56:14,908 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_2_branch2b_bn_running_var  mapped name: layer1.2.bn2.running.var
+2021-06-29 06:56:14,909 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_2_branch2b_w               mapped name: layer1.2.conv2.weight
+2021-06-29 06:56:14,909 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_2_branch2c_bn_beta         mapped name: layer1.2.bn3.biaseta
+2021-06-29 06:56:14,909 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_2_branch2c_bn_gamma        mapped name: layer1.2.bn3.gamma
+2021-06-29 06:56:14,909 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_2_branch2c_bn_running_mean mapped name: layer1.2.bn3.running.mean
+2021-06-29 06:56:14,909 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_2_branch2c_bn_running_var  mapped name: layer1.2.bn3.running.var
+2021-06-29 06:56:14,909 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res2_2_branch2c_w               mapped name: layer1.2.conv3.weight
+2021-06-29 06:56:14,909 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_0_branch1_bn_beta          mapped name: layer2.0.downsample.1.biaseta
+2021-06-29 06:56:14,909 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_0_branch1_bn_gamma         mapped name: layer2.0.downsample.1.gamma
+2021-06-29 06:56:14,909 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_0_branch1_bn_running_mean  mapped name: layer2.0.downsample.1.running.mean
+2021-06-29 06:56:14,909 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_0_branch1_bn_running_var   mapped name: layer2.0.downsample.1.running.var
+2021-06-29 06:56:14,909 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_0_branch1_w                mapped name: layer2.0.downsample.0.weight
+2021-06-29 06:56:14,909 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_0_branch2a_bn_beta         mapped name: layer2.0.bn1.biaseta
+2021-06-29 06:56:14,909 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_0_branch2a_bn_gamma        mapped name: layer2.0.bn1.gamma
+2021-06-29 06:56:14,910 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_0_branch2a_bn_running_mean mapped name: layer2.0.bn1.running.mean
+2021-06-29 06:56:14,910 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_0_branch2a_bn_running_var  mapped name: layer2.0.bn1.running.var
+2021-06-29 06:56:14,910 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_0_branch2a_w               mapped name: layer2.0.conv1.weight
+2021-06-29 06:56:14,910 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_0_branch2b_bn_beta         mapped name: layer2.0.bn2.biaseta
+2021-06-29 06:56:14,910 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_0_branch2b_bn_gamma        mapped name: layer2.0.bn2.gamma
+2021-06-29 06:56:14,910 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_0_branch2b_bn_running_mean mapped name: layer2.0.bn2.running.mean
+2021-06-29 06:56:14,910 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_0_branch2b_bn_running_var  mapped name: layer2.0.bn2.running.var
+2021-06-29 06:56:14,910 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_0_branch2b_w               mapped name: layer2.0.conv2.weight
+2021-06-29 06:56:14,910 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_0_branch2c_bn_beta         mapped name: layer2.0.bn3.biaseta
+2021-06-29 06:56:14,910 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_0_branch2c_bn_gamma        mapped name: layer2.0.bn3.gamma
+2021-06-29 06:56:14,910 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_0_branch2c_bn_running_mean mapped name: layer2.0.bn3.running.mean
+2021-06-29 06:56:14,911 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_0_branch2c_bn_running_var  mapped name: layer2.0.bn3.running.var
+2021-06-29 06:56:14,911 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_0_branch2c_w               mapped name: layer2.0.conv3.weight
+2021-06-29 06:56:14,911 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_1_branch2a_bn_beta         mapped name: layer2.1.bn1.biaseta
+2021-06-29 06:56:14,911 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_1_branch2a_bn_gamma        mapped name: layer2.1.bn1.gamma
+2021-06-29 06:56:14,911 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_1_branch2a_bn_running_mean mapped name: layer2.1.bn1.running.mean
+2021-06-29 06:56:14,911 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_1_branch2a_bn_running_var  mapped name: layer2.1.bn1.running.var
+2021-06-29 06:56:14,911 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_1_branch2a_w               mapped name: layer2.1.conv1.weight
+2021-06-29 06:56:14,911 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_1_branch2b_bn_beta         mapped name: layer2.1.bn2.biaseta
+2021-06-29 06:56:14,911 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_1_branch2b_bn_gamma        mapped name: layer2.1.bn2.gamma
+2021-06-29 06:56:14,911 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_1_branch2b_bn_running_mean mapped name: layer2.1.bn2.running.mean
+2021-06-29 06:56:14,911 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_1_branch2b_bn_running_var  mapped name: layer2.1.bn2.running.var
+2021-06-29 06:56:14,911 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_1_branch2b_w               mapped name: layer2.1.conv2.weight
+2021-06-29 06:56:14,911 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_1_branch2c_bn_beta         mapped name: layer2.1.bn3.biaseta
+2021-06-29 06:56:14,912 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_1_branch2c_bn_gamma        mapped name: layer2.1.bn3.gamma
+2021-06-29 06:56:14,912 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_1_branch2c_bn_running_mean mapped name: layer2.1.bn3.running.mean
+2021-06-29 06:56:14,912 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_1_branch2c_bn_running_var  mapped name: layer2.1.bn3.running.var
+2021-06-29 06:56:14,912 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_1_branch2c_w               mapped name: layer2.1.conv3.weight
+2021-06-29 06:56:14,912 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_2_branch2a_bn_beta         mapped name: layer2.2.bn1.biaseta
+2021-06-29 06:56:14,912 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_2_branch2a_bn_gamma        mapped name: layer2.2.bn1.gamma
+2021-06-29 06:56:14,912 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_2_branch2a_bn_running_mean mapped name: layer2.2.bn1.running.mean
+2021-06-29 06:56:14,912 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_2_branch2a_bn_running_var  mapped name: layer2.2.bn1.running.var
+2021-06-29 06:56:14,912 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_2_branch2a_w               mapped name: layer2.2.conv1.weight
+2021-06-29 06:56:14,912 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_2_branch2b_bn_beta         mapped name: layer2.2.bn2.biaseta
+2021-06-29 06:56:14,912 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_2_branch2b_bn_gamma        mapped name: layer2.2.bn2.gamma
+2021-06-29 06:56:14,913 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_2_branch2b_bn_running_mean mapped name: layer2.2.bn2.running.mean
+2021-06-29 06:56:14,913 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_2_branch2b_bn_running_var  mapped name: layer2.2.bn2.running.var
+2021-06-29 06:56:14,913 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_2_branch2b_w               mapped name: layer2.2.conv2.weight
+2021-06-29 06:56:14,913 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_2_branch2c_bn_beta         mapped name: layer2.2.bn3.biaseta
+2021-06-29 06:56:14,913 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_2_branch2c_bn_gamma        mapped name: layer2.2.bn3.gamma
+2021-06-29 06:56:14,913 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_2_branch2c_bn_running_mean mapped name: layer2.2.bn3.running.mean
+2021-06-29 06:56:14,913 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_2_branch2c_bn_running_var  mapped name: layer2.2.bn3.running.var
+2021-06-29 06:56:14,913 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_2_branch2c_w               mapped name: layer2.2.conv3.weight
+2021-06-29 06:56:14,913 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_3_branch2a_bn_beta         mapped name: layer2.3.bn1.biaseta
+2021-06-29 06:56:14,913 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_3_branch2a_bn_gamma        mapped name: layer2.3.bn1.gamma
+2021-06-29 06:56:14,913 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_3_branch2a_bn_running_mean mapped name: layer2.3.bn1.running.mean
+2021-06-29 06:56:14,913 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_3_branch2a_bn_running_var  mapped name: layer2.3.bn1.running.var
+2021-06-29 06:56:14,913 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_3_branch2a_w               mapped name: layer2.3.conv1.weight
+2021-06-29 06:56:14,913 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_3_branch2b_bn_beta         mapped name: layer2.3.bn2.biaseta
+2021-06-29 06:56:14,914 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_3_branch2b_bn_gamma        mapped name: layer2.3.bn2.gamma
+2021-06-29 06:56:14,914 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_3_branch2b_bn_running_mean mapped name: layer2.3.bn2.running.mean
+2021-06-29 06:56:14,914 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_3_branch2b_bn_running_var  mapped name: layer2.3.bn2.running.var
+2021-06-29 06:56:14,914 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_3_branch2b_w               mapped name: layer2.3.conv2.weight
+2021-06-29 06:56:14,914 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_3_branch2c_bn_beta         mapped name: layer2.3.bn3.biaseta
+2021-06-29 06:56:14,914 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_3_branch2c_bn_gamma        mapped name: layer2.3.bn3.gamma
+2021-06-29 06:56:14,914 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_3_branch2c_bn_running_mean mapped name: layer2.3.bn3.running.mean
+2021-06-29 06:56:14,914 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_3_branch2c_bn_running_var  mapped name: layer2.3.bn3.running.var
+2021-06-29 06:56:14,914 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res3_3_branch2c_w               mapped name: layer2.3.conv3.weight
+2021-06-29 06:56:14,914 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_0_branch1_bn_beta          mapped name: layer3.0.downsample.1.biaseta
+2021-06-29 06:56:14,914 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_0_branch1_bn_gamma         mapped name: layer3.0.downsample.1.gamma
+2021-06-29 06:56:14,914 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_0_branch1_bn_running_mean  mapped name: layer3.0.downsample.1.running.mean
+2021-06-29 06:56:14,914 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_0_branch1_bn_running_var   mapped name: layer3.0.downsample.1.running.var
+2021-06-29 06:56:14,914 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_0_branch1_w                mapped name: layer3.0.downsample.0.weight
+2021-06-29 06:56:14,914 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_0_branch2a_bn_beta         mapped name: layer3.0.bn1.biaseta
+2021-06-29 06:56:14,914 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_0_branch2a_bn_gamma        mapped name: layer3.0.bn1.gamma
+2021-06-29 06:56:14,915 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_0_branch2a_bn_running_mean mapped name: layer3.0.bn1.running.mean
+2021-06-29 06:56:14,915 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_0_branch2a_bn_running_var  mapped name: layer3.0.bn1.running.var
+2021-06-29 06:56:14,915 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_0_branch2a_w               mapped name: layer3.0.conv1.weight
+2021-06-29 06:56:14,915 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_0_branch2b_bn_beta         mapped name: layer3.0.bn2.biaseta
+2021-06-29 06:56:14,915 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_0_branch2b_bn_gamma        mapped name: layer3.0.bn2.gamma
+2021-06-29 06:56:14,915 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_0_branch2b_bn_running_mean mapped name: layer3.0.bn2.running.mean
+2021-06-29 06:56:14,915 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_0_branch2b_bn_running_var  mapped name: layer3.0.bn2.running.var
+2021-06-29 06:56:14,915 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_0_branch2b_w               mapped name: layer3.0.conv2.weight
+2021-06-29 06:56:14,915 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_0_branch2c_bn_beta         mapped name: layer3.0.bn3.biaseta
+2021-06-29 06:56:14,915 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_0_branch2c_bn_gamma        mapped name: layer3.0.bn3.gamma
+2021-06-29 06:56:14,915 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_0_branch2c_bn_running_mean mapped name: layer3.0.bn3.running.mean
+2021-06-29 06:56:14,915 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_0_branch2c_bn_running_var  mapped name: layer3.0.bn3.running.var
+2021-06-29 06:56:14,915 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_0_branch2c_w               mapped name: layer3.0.conv3.weight
+2021-06-29 06:56:14,915 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_1_branch2a_bn_beta         mapped name: layer3.1.bn1.biaseta
+2021-06-29 06:56:14,915 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_1_branch2a_bn_gamma        mapped name: layer3.1.bn1.gamma
+2021-06-29 06:56:14,916 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_1_branch2a_bn_running_mean mapped name: layer3.1.bn1.running.mean
+2021-06-29 06:56:14,916 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_1_branch2a_bn_running_var  mapped name: layer3.1.bn1.running.var
+2021-06-29 06:56:14,916 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_1_branch2a_w               mapped name: layer3.1.conv1.weight
+2021-06-29 06:56:14,916 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_1_branch2b_bn_beta         mapped name: layer3.1.bn2.biaseta
+2021-06-29 06:56:14,916 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_1_branch2b_bn_gamma        mapped name: layer3.1.bn2.gamma
+2021-06-29 06:56:14,916 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_1_branch2b_bn_running_mean mapped name: layer3.1.bn2.running.mean
+2021-06-29 06:56:14,916 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_1_branch2b_bn_running_var  mapped name: layer3.1.bn2.running.var
+2021-06-29 06:56:14,916 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_1_branch2b_w               mapped name: layer3.1.conv2.weight
+2021-06-29 06:56:14,916 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_1_branch2c_bn_beta         mapped name: layer3.1.bn3.biaseta
+2021-06-29 06:56:14,916 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_1_branch2c_bn_gamma        mapped name: layer3.1.bn3.gamma
+2021-06-29 06:56:14,916 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_1_branch2c_bn_running_mean mapped name: layer3.1.bn3.running.mean
+2021-06-29 06:56:14,916 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_1_branch2c_bn_running_var  mapped name: layer3.1.bn3.running.var
+2021-06-29 06:56:14,916 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_1_branch2c_w               mapped name: layer3.1.conv3.weight
+2021-06-29 06:56:14,916 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_2_branch2a_bn_beta         mapped name: layer3.2.bn1.biaseta
+2021-06-29 06:56:14,916 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_2_branch2a_bn_gamma        mapped name: layer3.2.bn1.gamma
+2021-06-29 06:56:14,917 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_2_branch2a_bn_running_mean mapped name: layer3.2.bn1.running.mean
+2021-06-29 06:56:14,917 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_2_branch2a_bn_running_var  mapped name: layer3.2.bn1.running.var
+2021-06-29 06:56:14,917 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_2_branch2a_w               mapped name: layer3.2.conv1.weight
+2021-06-29 06:56:14,917 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_2_branch2b_bn_beta         mapped name: layer3.2.bn2.biaseta
+2021-06-29 06:56:14,917 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_2_branch2b_bn_gamma        mapped name: layer3.2.bn2.gamma
+2021-06-29 06:56:14,917 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_2_branch2b_bn_running_mean mapped name: layer3.2.bn2.running.mean
+2021-06-29 06:56:14,917 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_2_branch2b_bn_running_var  mapped name: layer3.2.bn2.running.var
+2021-06-29 06:56:14,917 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_2_branch2b_w               mapped name: layer3.2.conv2.weight
+2021-06-29 06:56:14,917 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_2_branch2c_bn_beta         mapped name: layer3.2.bn3.biaseta
+2021-06-29 06:56:14,917 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_2_branch2c_bn_gamma        mapped name: layer3.2.bn3.gamma
+2021-06-29 06:56:14,917 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_2_branch2c_bn_running_mean mapped name: layer3.2.bn3.running.mean
+2021-06-29 06:56:14,917 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_2_branch2c_bn_running_var  mapped name: layer3.2.bn3.running.var
+2021-06-29 06:56:14,917 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_2_branch2c_w               mapped name: layer3.2.conv3.weight
+2021-06-29 06:56:14,917 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_3_branch2a_bn_beta         mapped name: layer3.3.bn1.biaseta
+2021-06-29 06:56:14,917 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_3_branch2a_bn_gamma        mapped name: layer3.3.bn1.gamma
+2021-06-29 06:56:14,917 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_3_branch2a_bn_running_mean mapped name: layer3.3.bn1.running.mean
+2021-06-29 06:56:14,918 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_3_branch2a_bn_running_var  mapped name: layer3.3.bn1.running.var
+2021-06-29 06:56:14,918 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_3_branch2a_w               mapped name: layer3.3.conv1.weight
+2021-06-29 06:56:14,918 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_3_branch2b_bn_beta         mapped name: layer3.3.bn2.biaseta
+2021-06-29 06:56:14,918 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_3_branch2b_bn_gamma        mapped name: layer3.3.bn2.gamma
+2021-06-29 06:56:14,918 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_3_branch2b_bn_running_mean mapped name: layer3.3.bn2.running.mean
+2021-06-29 06:56:14,918 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_3_branch2b_bn_running_var  mapped name: layer3.3.bn2.running.var
+2021-06-29 06:56:14,918 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_3_branch2b_w               mapped name: layer3.3.conv2.weight
+2021-06-29 06:56:14,918 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_3_branch2c_bn_beta         mapped name: layer3.3.bn3.biaseta
+2021-06-29 06:56:14,918 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_3_branch2c_bn_gamma        mapped name: layer3.3.bn3.gamma
+2021-06-29 06:56:14,918 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_3_branch2c_bn_running_mean mapped name: layer3.3.bn3.running.mean
+2021-06-29 06:56:14,918 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_3_branch2c_bn_running_var  mapped name: layer3.3.bn3.running.var
+2021-06-29 06:56:14,918 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_3_branch2c_w               mapped name: layer3.3.conv3.weight
+2021-06-29 06:56:14,918 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_4_branch2a_bn_beta         mapped name: layer3.4.bn1.biaseta
+2021-06-29 06:56:14,918 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_4_branch2a_bn_gamma        mapped name: layer3.4.bn1.gamma
+2021-06-29 06:56:14,919 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_4_branch2a_bn_running_mean mapped name: layer3.4.bn1.running.mean
+2021-06-29 06:56:14,919 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_4_branch2a_bn_running_var  mapped name: layer3.4.bn1.running.var
+2021-06-29 06:56:14,919 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_4_branch2a_w               mapped name: layer3.4.conv1.weight
+2021-06-29 06:56:14,919 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_4_branch2b_bn_beta         mapped name: layer3.4.bn2.biaseta
+2021-06-29 06:56:14,919 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_4_branch2b_bn_gamma        mapped name: layer3.4.bn2.gamma
+2021-06-29 06:56:14,919 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_4_branch2b_bn_running_mean mapped name: layer3.4.bn2.running.mean
+2021-06-29 06:56:14,919 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_4_branch2b_bn_running_var  mapped name: layer3.4.bn2.running.var
+2021-06-29 06:56:14,919 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_4_branch2b_w               mapped name: layer3.4.conv2.weight
+2021-06-29 06:56:14,919 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_4_branch2c_bn_beta         mapped name: layer3.4.bn3.biaseta
+2021-06-29 06:56:14,919 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_4_branch2c_bn_gamma        mapped name: layer3.4.bn3.gamma
+2021-06-29 06:56:14,919 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_4_branch2c_bn_running_mean mapped name: layer3.4.bn3.running.mean
+2021-06-29 06:56:14,919 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_4_branch2c_bn_running_var  mapped name: layer3.4.bn3.running.var
+2021-06-29 06:56:14,919 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_4_branch2c_w               mapped name: layer3.4.conv3.weight
+2021-06-29 06:56:14,919 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_5_branch2a_bn_beta         mapped name: layer3.5.bn1.biaseta
+2021-06-29 06:56:14,920 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_5_branch2a_bn_gamma        mapped name: layer3.5.bn1.gamma
+2021-06-29 06:56:14,920 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_5_branch2a_bn_running_mean mapped name: layer3.5.bn1.running.mean
+2021-06-29 06:56:14,920 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_5_branch2a_bn_running_var  mapped name: layer3.5.bn1.running.var
+2021-06-29 06:56:14,920 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_5_branch2a_w               mapped name: layer3.5.conv1.weight
+2021-06-29 06:56:14,920 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_5_branch2b_bn_beta         mapped name: layer3.5.bn2.biaseta
+2021-06-29 06:56:14,920 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_5_branch2b_bn_gamma        mapped name: layer3.5.bn2.gamma
+2021-06-29 06:56:14,920 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_5_branch2b_bn_running_mean mapped name: layer3.5.bn2.running.mean
+2021-06-29 06:56:14,920 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_5_branch2b_bn_running_var  mapped name: layer3.5.bn2.running.var
+2021-06-29 06:56:14,920 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_5_branch2b_w               mapped name: layer3.5.conv2.weight
+2021-06-29 06:56:14,920 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_5_branch2c_bn_beta         mapped name: layer3.5.bn3.biaseta
+2021-06-29 06:56:14,920 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_5_branch2c_bn_gamma        mapped name: layer3.5.bn3.gamma
+2021-06-29 06:56:14,920 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_5_branch2c_bn_running_mean mapped name: layer3.5.bn3.running.mean
+2021-06-29 06:56:14,920 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_5_branch2c_bn_running_var  mapped name: layer3.5.bn3.running.var
+2021-06-29 06:56:14,920 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res4_5_branch2c_w               mapped name: layer3.5.conv3.weight
+2021-06-29 06:56:14,920 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_0_branch1_bn_beta          mapped name: layer4.0.downsample.1.biaseta
+2021-06-29 06:56:14,921 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_0_branch1_bn_gamma         mapped name: layer4.0.downsample.1.gamma
+2021-06-29 06:56:14,921 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_0_branch1_bn_running_mean  mapped name: layer4.0.downsample.1.running.mean
+2021-06-29 06:56:14,921 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_0_branch1_bn_running_var   mapped name: layer4.0.downsample.1.running.var
+2021-06-29 06:56:14,921 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_0_branch1_w                mapped name: layer4.0.downsample.0.weight
+2021-06-29 06:56:14,921 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_0_branch2a_bn_beta         mapped name: layer4.0.bn1.biaseta
+2021-06-29 06:56:14,921 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_0_branch2a_bn_gamma        mapped name: layer4.0.bn1.gamma
+2021-06-29 06:56:14,921 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_0_branch2a_bn_running_mean mapped name: layer4.0.bn1.running.mean
+2021-06-29 06:56:14,921 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_0_branch2a_bn_running_var  mapped name: layer4.0.bn1.running.var
+2021-06-29 06:56:14,921 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_0_branch2a_w               mapped name: layer4.0.conv1.weight
+2021-06-29 06:56:14,921 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_0_branch2b_bn_beta         mapped name: layer4.0.bn2.biaseta
+2021-06-29 06:56:14,921 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_0_branch2b_bn_gamma        mapped name: layer4.0.bn2.gamma
+2021-06-29 06:56:14,921 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_0_branch2b_bn_running_mean mapped name: layer4.0.bn2.running.mean
+2021-06-29 06:56:14,921 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_0_branch2b_bn_running_var  mapped name: layer4.0.bn2.running.var
+2021-06-29 06:56:14,921 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_0_branch2b_w               mapped name: layer4.0.conv2.weight
+2021-06-29 06:56:14,921 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_0_branch2c_bn_beta         mapped name: layer4.0.bn3.biaseta
+2021-06-29 06:56:14,921 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_0_branch2c_bn_gamma        mapped name: layer4.0.bn3.gamma
+2021-06-29 06:56:14,922 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_0_branch2c_bn_running_mean mapped name: layer4.0.bn3.running.mean
+2021-06-29 06:56:14,922 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_0_branch2c_bn_running_var  mapped name: layer4.0.bn3.running.var
+2021-06-29 06:56:14,922 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_0_branch2c_w               mapped name: layer4.0.conv3.weight
+2021-06-29 06:56:14,922 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_1_branch2a_bn_beta         mapped name: layer4.1.bn1.biaseta
+2021-06-29 06:56:14,922 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_1_branch2a_bn_gamma        mapped name: layer4.1.bn1.gamma
+2021-06-29 06:56:14,922 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_1_branch2a_bn_running_mean mapped name: layer4.1.bn1.running.mean
+2021-06-29 06:56:14,922 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_1_branch2a_bn_running_var  mapped name: layer4.1.bn1.running.var
+2021-06-29 06:56:14,922 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_1_branch2a_w               mapped name: layer4.1.conv1.weight
+2021-06-29 06:56:14,922 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_1_branch2b_bn_beta         mapped name: layer4.1.bn2.biaseta
+2021-06-29 06:56:14,922 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_1_branch2b_bn_gamma        mapped name: layer4.1.bn2.gamma
+2021-06-29 06:56:14,922 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_1_branch2b_bn_running_mean mapped name: layer4.1.bn2.running.mean
+2021-06-29 06:56:14,922 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_1_branch2b_bn_running_var  mapped name: layer4.1.bn2.running.var
+2021-06-29 06:56:14,922 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_1_branch2b_w               mapped name: layer4.1.conv2.weight
+2021-06-29 06:56:14,922 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_1_branch2c_bn_beta         mapped name: layer4.1.bn3.biaseta
+2021-06-29 06:56:14,922 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_1_branch2c_bn_gamma        mapped name: layer4.1.bn3.gamma
+2021-06-29 06:56:14,923 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_1_branch2c_bn_running_mean mapped name: layer4.1.bn3.running.mean
+2021-06-29 06:56:14,923 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_1_branch2c_bn_running_var  mapped name: layer4.1.bn3.running.var
+2021-06-29 06:56:14,923 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_1_branch2c_w               mapped name: layer4.1.conv3.weight
+2021-06-29 06:56:14,923 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_2_branch2a_bn_beta         mapped name: layer4.2.bn1.biaseta
+2021-06-29 06:56:14,923 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_2_branch2a_bn_gamma        mapped name: layer4.2.bn1.gamma
+2021-06-29 06:56:14,923 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_2_branch2a_bn_running_mean mapped name: layer4.2.bn1.running.mean
+2021-06-29 06:56:14,923 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_2_branch2a_bn_running_var  mapped name: layer4.2.bn1.running.var
+2021-06-29 06:56:14,923 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_2_branch2a_w               mapped name: layer4.2.conv1.weight
+2021-06-29 06:56:14,923 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_2_branch2b_bn_beta         mapped name: layer4.2.bn2.biaseta
+2021-06-29 06:56:14,923 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_2_branch2b_bn_gamma        mapped name: layer4.2.bn2.gamma
+2021-06-29 06:56:14,923 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_2_branch2b_bn_running_mean mapped name: layer4.2.bn2.running.mean
+2021-06-29 06:56:14,923 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_2_branch2b_bn_running_var  mapped name: layer4.2.bn2.running.var
+2021-06-29 06:56:14,923 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_2_branch2b_w               mapped name: layer4.2.conv2.weight
+2021-06-29 06:56:14,923 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_2_branch2c_bn_beta         mapped name: layer4.2.bn3.biaseta
+2021-06-29 06:56:14,923 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_2_branch2c_bn_gamma        mapped name: layer4.2.bn3.gamma
+2021-06-29 06:56:14,923 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_2_branch2c_bn_running_mean mapped name: layer4.2.bn3.running.mean
+2021-06-29 06:56:14,924 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_2_branch2c_bn_running_var  mapped name: layer4.2.bn3.running.var
+2021-06-29 06:56:14,924 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res5_2_branch2c_w               mapped name: layer4.2.conv3.weight
+2021-06-29 06:56:14,924 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res_conv1_bn_beta               mapped name: bn1.biaseta
+2021-06-29 06:56:14,924 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res_conv1_bn_gamma              mapped name: bn1.gamma
+2021-06-29 06:56:14,924 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res_conv1_bn_running_mean       mapped name: bn1.running.mean
+2021-06-29 06:56:14,924 maskrcnn_benchmark.utils.c2_model_loading INFO: C2 name: res_conv1_bn_running_var        mapped name: bn1.running.var
+2021-06-29 06:56:14,944 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer1.0.conv1.weight               loaded from layer1.0.conv1.weight              of shape (64, 64, 1, 1)
+2021-06-29 06:56:14,944 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer1.0.conv2.weight               loaded from layer1.0.conv2.weight              of shape (64, 64, 3, 3)
+2021-06-29 06:56:14,944 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer1.0.conv3.weight               loaded from layer1.0.conv3.weight              of shape (256, 64, 1, 1)
+2021-06-29 06:56:14,944 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer1.0.downsample.0.weight        loaded from layer1.0.downsample.0.weight       of shape (256, 64, 1, 1)
+2021-06-29 06:56:14,944 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer1.1.conv1.weight               loaded from layer1.1.conv1.weight              of shape (64, 256, 1, 1)
+2021-06-29 06:56:14,944 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer1.1.conv2.weight               loaded from layer1.1.conv2.weight              of shape (64, 64, 3, 3)
+2021-06-29 06:56:14,945 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer1.1.conv3.weight               loaded from layer1.1.conv3.weight              of shape (256, 64, 1, 1)
+2021-06-29 06:56:14,945 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer1.2.conv1.weight               loaded from layer1.2.conv1.weight              of shape (64, 256, 1, 1)
+2021-06-29 06:56:14,945 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer1.2.conv2.weight               loaded from layer1.2.conv2.weight              of shape (64, 64, 3, 3)
+2021-06-29 06:56:14,945 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer1.2.conv3.weight               loaded from layer1.2.conv3.weight              of shape (256, 64, 1, 1)
+2021-06-29 06:56:14,945 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer2.0.conv1.weight               loaded from layer2.0.conv1.weight              of shape (128, 256, 1, 1)
+2021-06-29 06:56:14,945 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer2.0.conv2.weight               loaded from layer2.0.conv2.weight              of shape (128, 128, 3, 3)
+2021-06-29 06:56:14,945 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer2.0.conv3.weight               loaded from layer2.0.conv3.weight              of shape (512, 128, 1, 1)
+2021-06-29 06:56:14,945 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer2.0.downsample.0.weight        loaded from layer2.0.downsample.0.weight       of shape (512, 256, 1, 1)
+2021-06-29 06:56:14,946 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer2.1.conv1.weight               loaded from layer2.1.conv1.weight              of shape (128, 512, 1, 1)
+2021-06-29 06:56:14,946 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer2.1.conv2.weight               loaded from layer2.1.conv2.weight              of shape (128, 128, 3, 3)
+2021-06-29 06:56:14,946 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer2.1.conv3.weight               loaded from layer2.1.conv3.weight              of shape (512, 128, 1, 1)
+2021-06-29 06:56:14,946 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer2.2.conv1.weight               loaded from layer2.2.conv1.weight              of shape (128, 512, 1, 1)
+2021-06-29 06:56:14,946 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer2.2.conv2.weight               loaded from layer2.2.conv2.weight              of shape (128, 128, 3, 3)
+2021-06-29 06:56:14,946 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer2.2.conv3.weight               loaded from layer2.2.conv3.weight              of shape (512, 128, 1, 1)
+2021-06-29 06:56:14,946 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer2.3.conv1.weight               loaded from layer2.3.conv1.weight              of shape (128, 512, 1, 1)
+2021-06-29 06:56:14,947 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer2.3.conv2.weight               loaded from layer2.3.conv2.weight              of shape (128, 128, 3, 3)
+2021-06-29 06:56:14,947 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer2.3.conv3.weight               loaded from layer2.3.conv3.weight              of shape (512, 128, 1, 1)
+2021-06-29 06:56:14,947 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer3.0.conv1.weight               loaded from layer3.0.conv1.weight              of shape (256, 512, 1, 1)
+2021-06-29 06:56:14,948 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer3.0.conv2.weight               loaded from layer3.0.conv2.weight              of shape (256, 256, 3, 3)
+2021-06-29 06:56:14,948 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer3.0.conv3.weight               loaded from layer3.0.conv3.weight              of shape (1024, 256, 1, 1)
+2021-06-29 06:56:14,948 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer3.0.downsample.0.weight        loaded from layer3.0.downsample.0.weight       of shape (1024, 512, 1, 1)
+2021-06-29 06:56:14,948 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer3.1.conv1.weight               loaded from layer3.1.conv1.weight              of shape (256, 1024, 1, 1)
+2021-06-29 06:56:14,949 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer3.1.conv2.weight               loaded from layer3.1.conv2.weight              of shape (256, 256, 3, 3)
+2021-06-29 06:56:14,949 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer3.1.conv3.weight               loaded from layer3.1.conv3.weight              of shape (1024, 256, 1, 1)
+2021-06-29 06:56:14,949 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer3.2.conv1.weight               loaded from layer3.2.conv1.weight              of shape (256, 1024, 1, 1)
+2021-06-29 06:56:14,949 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer3.2.conv2.weight               loaded from layer3.2.conv2.weight              of shape (256, 256, 3, 3)
+2021-06-29 06:56:14,950 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer3.2.conv3.weight               loaded from layer3.2.conv3.weight              of shape (1024, 256, 1, 1)
+2021-06-29 06:56:14,950 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer3.3.conv1.weight               loaded from layer3.3.conv1.weight              of shape (256, 1024, 1, 1)
+2021-06-29 06:56:14,950 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer3.3.conv2.weight               loaded from layer3.3.conv2.weight              of shape (256, 256, 3, 3)
+2021-06-29 06:56:14,950 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer3.3.conv3.weight               loaded from layer3.3.conv3.weight              of shape (1024, 256, 1, 1)
+2021-06-29 06:56:14,950 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer3.4.conv1.weight               loaded from layer3.4.conv1.weight              of shape (256, 1024, 1, 1)
+2021-06-29 06:56:14,951 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer3.4.conv2.weight               loaded from layer3.4.conv2.weight              of shape (256, 256, 3, 3)
+2021-06-29 06:56:14,951 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer3.4.conv3.weight               loaded from layer3.4.conv3.weight              of shape (1024, 256, 1, 1)
+2021-06-29 06:56:14,952 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer3.5.conv1.weight               loaded from layer3.5.conv1.weight              of shape (256, 1024, 1, 1)
+2021-06-29 06:56:14,952 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer3.5.conv2.weight               loaded from layer3.5.conv2.weight              of shape (256, 256, 3, 3)
+2021-06-29 06:56:14,952 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer3.5.conv3.weight               loaded from layer3.5.conv3.weight              of shape (1024, 256, 1, 1)
+2021-06-29 06:56:14,952 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer4.0.conv1.weight               loaded from layer4.0.conv1.weight              of shape (512, 1024, 1, 1)
+2021-06-29 06:56:14,954 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer4.0.conv2.weight               loaded from layer4.0.conv2.weight              of shape (512, 512, 3, 3)
+2021-06-29 06:56:14,954 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer4.0.conv3.weight               loaded from layer4.0.conv3.weight              of shape (2048, 512, 1, 1)
+2021-06-29 06:56:14,955 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer4.0.downsample.0.weight        loaded from layer4.0.downsample.0.weight       of shape (2048, 1024, 1, 1)
+2021-06-29 06:56:14,955 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer4.1.conv1.weight               loaded from layer4.1.conv1.weight              of shape (512, 2048, 1, 1)
+2021-06-29 06:56:14,960 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer4.1.conv2.weight               loaded from layer4.1.conv2.weight              of shape (512, 512, 3, 3)
+2021-06-29 06:56:14,961 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer4.1.conv3.weight               loaded from layer4.1.conv3.weight              of shape (2048, 512, 1, 1)
+2021-06-29 06:56:14,961 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer4.2.conv1.weight               loaded from layer4.2.conv1.weight              of shape (512, 2048, 1, 1)
+2021-06-29 06:56:14,966 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer4.2.conv2.weight               loaded from layer4.2.conv2.weight              of shape (512, 512, 3, 3)
+2021-06-29 06:56:14,966 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.layer4.2.conv3.weight               loaded from layer4.2.conv3.weight              of shape (2048, 512, 1, 1)
+2021-06-29 06:56:14,966 maskrcnn_benchmark.utils.model_serialization INFO: module.backbone.body.stem.conv1.weight                   loaded from conv1.weight                       of shape (64, 3, 7, 7)
+/opt/conda/lib/python3.6/site-packages/torch/nn/modules/conv.py:1009: UserWarning: _ConvTransposeMixin is a deprecated internal class. Please consider using public APIs.
+  "_ConvTransposeMixin is a deprecated internal class. "
+/opt/conda/lib/python3.6/site-packages/torch/nn/modules/conv.py:1009: UserWarning: _ConvTransposeMixin is a deprecated internal class. Please consider using public APIs.
+  "_ConvTransposeMixin is a deprecated internal class. "
+/opt/conda/lib/python3.6/site-packages/torch/nn/modules/conv.py:1009: UserWarning: _ConvTransposeMixin is a deprecated internal class. Please consider using public APIs.
+  "_ConvTransposeMixin is a deprecated internal class. "
+:::MLLOG {"namespace": "", "time_ms": 1624949775766, "event_type": "INTERVAL_END", "key": "init_stop", "value": null, "metadata": {"file": "tools/train_mlperf.py", "lineno": 205}}
+:::MLLOG {"namespace": "", "time_ms": 1624949775839, "event_type": "INTERVAL_START", "key": "run_start", "value": null, "metadata": {"file": "tools/train_mlperf.py", "lineno": 207}}
+When using more than one image per GPU you may encounter an out-of-memory (OOM) error if your GPU does not have sufficient memory. If this happens, you can reduce SOLVER.IMS_PER_BATCH (for training) or TEST.IMS_PER_BATCH (for inference). For training, you must also adjust the learning rate and schedule length according to the linear scaling rule. See for example: https://github.com/facebookresearch/Detectron/blob/master/configs/getting_started/tutorial_1gpu_e2e_faster_rcnn_R-50-FPN.yaml#L14
+When using more than one image per GPU you may encounter an out-of-memory (OOM) error if your GPU does not have sufficient memory. If this happens, you can reduce SOLVER.IMS_PER_BATCH (for training) or TEST.IMS_PER_BATCH (for inference). For training, you must also adjust the learning rate and schedule length according to the linear scaling rule. See for example: https://github.com/facebookresearch/Detectron/blob/master/configs/getting_started/tutorial_1gpu_e2e_faster_rcnn_R-50-FPN.yaml#L14
+2021-06-29 06:56:15,839 maskrcnn_benchmark.data.build WARNING: When using more than one image per GPU you may encounter an out-of-memory (OOM) error if your GPU does not have sufficient memory. If this happens, you can reduce SOLVER.IMS_PER_BATCH (for training) or TEST.IMS_PER_BATCH (for inference). For training, you must also adjust the learning rate and schedule length according to the linear scaling rule. See for example: https://github.com/facebookresearch/Detectron/blob/master/configs/getting_started/tutorial_1gpu_e2e_faster_rcnn_R-50-FPN.yaml#L14
+When using more than one image per GPU you may encounter an out-of-memory (OOM) error if your GPU does not have sufficient memory. If this happens, you can reduce SOLVER.IMS_PER_BATCH (for training) or TEST.IMS_PER_BATCH (for inference). For training, you must also adjust the learning rate and schedule length according to the linear scaling rule. See for example: https://github.com/facebookresearch/Detectron/blob/master/configs/getting_started/tutorial_1gpu_e2e_faster_rcnn_R-50-FPN.yaml#L14
+loading annotations into memory...
+loading annotations into memory...
+loading annotations into memory...
+loading annotations into memory...
+Done (t=8.20s)
+creating index...
+Done (t=8.37s)
+creating index...
+Done (t=8.56s)
+creating index...
+Done (t=8.76s)
+creating index...
+index created!
+index created!
+index created!
+index created!
+:::MLLOG {"namespace": "", "time_ms": 1624949787518, "event_type": "POINT_IN_TIME", "key": "train_samples", "value": 400, "metadata": {"file": "tools/train_mlperf.py", "lineno": 217}}
+2021-06-29 06:56:27,519 maskrcnn_benchmark.trainer INFO: Start training
+/workspace/object_detection/maskrcnn_benchmark/structures/bounding_box.py:223: UserWarning: This overload of nonzero is deprecated:
+	nonzero(Tensor input, *, Tensor out)
+Consider using one of the following signatures instead:
+	nonzero(Tensor input, *, bool as_tuple) (Triggered internally at  ../torch/csrc/utils/python_arg_parser.cpp:760.)
+  item = torch.nonzero(item).squeeze(1)
+/workspace/object_detection/maskrcnn_benchmark/structures/bounding_box.py:223: UserWarning: This overload of nonzero is deprecated:
+	nonzero(Tensor input, *, Tensor out)
+Consider using one of the following signatures instead:
+	nonzero(Tensor input, *, bool as_tuple) (Triggered internally at  ../torch/csrc/utils/python_arg_parser.cpp:760.)
+  item = torch.nonzero(item).squeeze(1)
+/workspace/object_detection/maskrcnn_benchmark/structures/bounding_box.py:223: UserWarning: This overload of nonzero is deprecated:
+	nonzero(Tensor input, *, Tensor out)
+Consider using one of the following signatures instead:
+	nonzero(Tensor input, *, bool as_tuple) (Triggered internally at  ../torch/csrc/utils/python_arg_parser.cpp:760.)
+  item = torch.nonzero(item).squeeze(1)
+/workspace/object_detection/maskrcnn_benchmark/structures/bounding_box.py:223: UserWarning: This overload of nonzero is deprecated:
+	nonzero(Tensor input, *, Tensor out)
+Consider using one of the following signatures instead:
+	nonzero(Tensor input, *, bool as_tuple) (Triggered internally at  ../torch/csrc/utils/python_arg_parser.cpp:760.)
+  item = torch.nonzero(item).squeeze(1)
+/workspace/object_detection/maskrcnn_benchmark/structures/bounding_box.py:223: UserWarning: This overload of nonzero is deprecated:
+	nonzero(Tensor input, *, Tensor out)
+Consider using one of the following signatures instead:
+	nonzero(Tensor input, *, bool as_tuple) (Triggered internally at  ../torch/csrc/utils/python_arg_parser.cpp:760.)
+  item = torch.nonzero(item).squeeze(1)
+/workspace/object_detection/maskrcnn_benchmark/structures/bounding_box.py:223: UserWarning: This overload of nonzero is deprecated:
+	nonzero(Tensor input, *, Tensor out)
+Consider using one of the following signatures instead:
+	nonzero(Tensor input, *, bool as_tuple) (Triggered internally at  ../torch/csrc/utils/python_arg_parser.cpp:760.)
+  item = torch.nonzero(item).squeeze(1)
+/workspace/object_detection/maskrcnn_benchmark/structures/bounding_box.py:223: UserWarning: This overload of nonzero is deprecated:
+	nonzero(Tensor input, *, Tensor out)
+Consider using one of the following signatures instead:
+	nonzero(Tensor input, *, bool as_tuple) (Triggered internally at  ../torch/csrc/utils/python_arg_parser.cpp:760.)
+  item = torch.nonzero(item).squeeze(1)
+/workspace/object_detection/maskrcnn_benchmark/structures/bounding_box.py:223: UserWarning: This overload of nonzero is deprecated:
+	nonzero(Tensor input, *, Tensor out)
+Consider using one of the following signatures instead:
+	nonzero(Tensor input, *, bool as_tuple) (Triggered internally at  ../torch/csrc/utils/python_arg_parser.cpp:760.)
+  item = torch.nonzero(item).squeeze(1)
+/workspace/object_detection/maskrcnn_benchmark/structures/bounding_box.py:223: UserWarning: This overload of nonzero is deprecated:
+	nonzero(Tensor input, *, Tensor out)
+Consider using one of the following signatures instead:
+	nonzero(Tensor input, *, bool as_tuple) (Triggered internally at  ../torch/csrc/utils/python_arg_parser.cpp:760.)
+  item = torch.nonzero(item).squeeze(1)
+/workspace/object_detection/maskrcnn_benchmark/structures/bounding_box.py:223: UserWarning: This overload of nonzero is deprecated:
+	nonzero(Tensor input, *, Tensor out)
+Consider using one of the following signatures instead:
+	nonzero(Tensor input, *, bool as_tuple) (Triggered internally at  ../torch/csrc/utils/python_arg_parser.cpp:760.)
+  item = torch.nonzero(item).squeeze(1)
+/workspace/object_detection/maskrcnn_benchmark/structures/bounding_box.py:223: UserWarning: This overload of nonzero is deprecated:
+	nonzero(Tensor input, *, Tensor out)
+Consider using one of the following signatures instead:
+	nonzero(Tensor input, *, bool as_tuple) (Triggered internally at  ../torch/csrc/utils/python_arg_parser.cpp:760.)
+  item = torch.nonzero(item).squeeze(1)
+/workspace/object_detection/maskrcnn_benchmark/structures/bounding_box.py:223: UserWarning: This overload of nonzero is deprecated:
+	nonzero(Tensor input, *, Tensor out)
+Consider using one of the following signatures instead:
+	nonzero(Tensor input, *, bool as_tuple) (Triggered internally at  ../torch/csrc/utils/python_arg_parser.cpp:760.)
+  item = torch.nonzero(item).squeeze(1)
+/workspace/object_detection/maskrcnn_benchmark/structures/bounding_box.py:223: UserWarning: This overload of nonzero is deprecated:
+	nonzero(Tensor input, *, Tensor out)
+Consider using one of the following signatures instead:
+	nonzero(Tensor input, *, bool as_tuple) (Triggered internally at  ../torch/csrc/utils/python_arg_parser.cpp:760.)
+  item = torch.nonzero(item).squeeze(1)
+/workspace/object_detection/maskrcnn_benchmark/structures/bounding_box.py:223: UserWarning: This overload of nonzero is deprecated:
+	nonzero(Tensor input, *, Tensor out)
+Consider using one of the following signatures instead:
+	nonzero(Tensor input, *, bool as_tuple) (Triggered internally at  ../torch/csrc/utils/python_arg_parser.cpp:760.)
+  item = torch.nonzero(item).squeeze(1)
+/workspace/object_detection/maskrcnn_benchmark/structures/bounding_box.py:223: UserWarning: This overload of nonzero is deprecated:
+	nonzero(Tensor input, *, Tensor out)
+Consider using one of the following signatures instead:
+	nonzero(Tensor input, *, bool as_tuple) (Triggered internally at  ../torch/csrc/utils/python_arg_parser.cpp:760.)
+  item = torch.nonzero(item).squeeze(1)
+/workspace/object_detection/maskrcnn_benchmark/structures/bounding_box.py:223: UserWarning: This overload of nonzero is deprecated:
+	nonzero(Tensor input, *, Tensor out)
+Consider using one of the following signatures instead:
+	nonzero(Tensor input, *, bool as_tuple) (Triggered internally at  ../torch/csrc/utils/python_arg_parser.cpp:760.)
+  item = torch.nonzero(item).squeeze(1)
+:::MLLOG {"namespace": "", "time_ms": 1624949789398, "event_type": "INTERVAL_START", "key": "block_start", "value": null, "metadata": {"file": "tools/train_mlperf.py", "lineno": 130, "first_epoch_num": 1, "epoch_count": 1}}
+:::MLLOG {"namespace": "", "time_ms": 1624949789399, "event_type": "INTERVAL_START", "key": "epoch_start", "value": null, "metadata": {"file": "tools/train_mlperf.py", "lineno": 131, "epoch_num": 1}}
+/workspace/object_detection/maskrcnn_benchmark/modeling/poolers.py:126: UserWarning: This overload of nonzero is deprecated:
+	nonzero(Tensor input, *, Tensor out)
+Consider using one of the following signatures instead:
+	nonzero(Tensor input, *, bool as_tuple) (Triggered internally at  ../torch/csrc/utils/python_arg_parser.cpp:760.)
+  idx_in_level = torch.nonzero(levels == level).squeeze(1)
+/workspace/object_detection/maskrcnn_benchmark/modeling/poolers.py:126: UserWarning: This overload of nonzero is deprecated:
+	nonzero(Tensor input, *, Tensor out)
+Consider using one of the following signatures instead:
+	nonzero(Tensor input, *, bool as_tuple) (Triggered internally at  ../torch/csrc/utils/python_arg_parser.cpp:760.)
+  idx_in_level = torch.nonzero(levels == level).squeeze(1)
+/workspace/object_detection/maskrcnn_benchmark/modeling/poolers.py:126: UserWarning: This overload of nonzero is deprecated:
+	nonzero(Tensor input, *, Tensor out)
+Consider using one of the following signatures instead:
+	nonzero(Tensor input, *, bool as_tuple) (Triggered internally at  ../torch/csrc/utils/python_arg_parser.cpp:760.)
+  idx_in_level = torch.nonzero(levels == level).squeeze(1)
+/workspace/object_detection/maskrcnn_benchmark/modeling/poolers.py:126: UserWarning: This overload of nonzero is deprecated:
+	nonzero(Tensor input, *, Tensor out)
+Consider using one of the following signatures instead:
+	nonzero(Tensor input, *, bool as_tuple) (Triggered internally at  ../torch/csrc/utils/python_arg_parser.cpp:760.)
+  idx_in_level = torch.nonzero(levels == level).squeeze(1)
+
+Grad overflow on iteration 
+Grad overflow on iteration  0
+ 0
+Using dynamic loss scale of  65536
+Using dynamic loss scale of  65536
+
+Grad overflow on iteration  0
+Using dynamic loss scale of  65536
+
+Grad overflow on iteration  0
+Using dynamic loss scale of  65536
+/opt/conda/lib/python3.6/site-packages/torch/optim/lr_scheduler.py:123: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  "https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate", UserWarning)
+/opt/conda/lib/python3.6/site-packages/torch/optim/lr_scheduler.py:123: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  "https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate", UserWarning)
+/opt/conda/lib/python3.6/site-packages/torch/optim/lr_scheduler.py:123: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  "https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate", UserWarning)
+/opt/conda/lib/python3.6/site-packages/torch/optim/lr_scheduler.py:123: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  "https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate", UserWarning)
+
+Grad overflow on iteration 
+Grad overflow on iteration  1
+ 1
+Using dynamic loss scale of  32768.0
+Using dynamic loss scale of  32768.0
+
+Grad overflow on iteration  1
+Using dynamic loss scale of  32768.0
+
+Grad overflow on iteration  1
+Using dynamic loss scale of  32768.0
+
+Grad overflow on iteration 
+Grad overflow on iteration  2
+ 2
+Using dynamic loss scale of  16384.0
+Using dynamic loss scale of  16384.0
+
+Grad overflow on iteration  2
+Using dynamic loss scale of  16384.0
+
+Grad overflow on iteration  2
+Using dynamic loss scale of  16384.0
+
+Grad overflow on iteration 
+Grad overflow on iteration  3
+Using dynamic loss scale of  8192.0
+ 3
+
+Grad overflow on iteration Using dynamic loss scale of  8192.0
+ 3
+Using dynamic loss scale of  8192.0
+
+Grad overflow on iteration  3
+Using dynamic loss scale of  8192.0
+
+Grad overflow on iteration 
+Grad overflow on iteration  4
+ 4
+Using dynamic loss scale of  4096.0
+
+Grad overflow on iteration Using dynamic loss scale of  4096.0
+ 4
+Using dynamic loss scale of  4096.0
+
+Grad overflow on iteration  4
+Using dynamic loss scale of  4096.0
+
+Grad overflow on iteration 
+Grad overflow on iteration  5
+Using dynamic loss scale of  2048.0
+ 5
+Using dynamic loss scale of  2048.0
+
+Grad overflow on iteration  5
+
+Grad overflow on iteration Using dynamic loss scale of  2048.0
+ 5
+Using dynamic loss scale of  2048.0
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  6
+ 6
+Using dynamic loss scale of  1024.0
+Using dynamic loss scale of  1024.0
+ 6
+Using dynamic loss scale of  1024.0
+
+Grad overflow on iteration  6
+Using dynamic loss scale of  1024.0
+
+Grad overflow on iteration 
+Grad overflow on iteration  7
+ 7
+Using dynamic loss scale of  512.0
+Using dynamic loss scale of  512.0
+
+Grad overflow on iteration  7
+Using dynamic loss scale of  512.0
+
+Grad overflow on iteration  7
+Using dynamic loss scale of  512.0
+2021-06-29 06:58:32,388 maskrcnn_benchmark.trainer INFO: eta: 0:39:32  iter: 20  loss: 11.9941 (21.5834)  loss_classifier: 7.1245 (11.6707)  loss_box_reg: 0.0164 (0.0283)  loss_mask: 4.7891 (8.6506)  loss_objectness: 0.8539 (1.0101)  loss_rpn_box_reg: 0.0928 (0.2238)  time: 6.7272 (6.2433)  data: 0.0041 (0.1018)  lr: 0.001920  max mem: 6279
+
+Grad overflow on iteration 
+Grad overflow on iteration  27
+ 27
+Using dynamic loss scale of  256.0
+Using dynamic loss scale of  256.0
+
+Grad overflow on iteration  27
+Using dynamic loss scale of  256.0
+
+Grad overflow on iteration  27
+Using dynamic loss scale of  256.0
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  28
+ 28
+ 28
+Using dynamic loss scale of  128.0
+Using dynamic loss scale of  128.0
+Using dynamic loss scale of  128.0
+
+Grad overflow on iteration  28
+Using dynamic loss scale of  128.0
+
+Grad overflow on iteration 
+Grad overflow on iteration  29
+ 29
+Using dynamic loss scale of  64.0
+Using dynamic loss scale of  64.0
+
+Grad overflow on iteration  29
+Using dynamic loss scale of  64.0
+
+Grad overflow on iteration  29
+Using dynamic loss scale of  64.0
+
+Grad overflow on iteration 
+Grad overflow on iteration  31
+
+Grad overflow on iteration Using dynamic loss scale of  32.0
+ 31
+ 31
+Using dynamic loss scale of  32.0
+Using dynamic loss scale of  32.0
+
+Grad overflow on iteration  31
+Using dynamic loss scale of  32.0
+
+Grad overflow on iteration  32
+
+Grad overflow on iteration Using dynamic loss scale of  16.0
+ 32
+Using dynamic loss scale of  16.0
+
+Grad overflow on iteration  32
+Using dynamic loss scale of  16.0
+
+Grad overflow on iteration  32
+Using dynamic loss scale of  16.0
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  33
+ 33
+ 33
+Using dynamic loss scale of  8.0
+Using dynamic loss scale of  8.0
+Using dynamic loss scale of  8.0
+
+Grad overflow on iteration  33
+Using dynamic loss scale of  8.0
+
+Grad overflow on iteration 
+Grad overflow on iteration  34
+Using dynamic loss scale of  4.0
+ 34
+Using dynamic loss scale of  4.0
+
+Grad overflow on iteration  34
+Using dynamic loss scale of  4.0
+
+Grad overflow on iteration  34
+Using dynamic loss scale of  4.0
+
+Grad overflow on iteration 
+Grad overflow on iteration  35
+ 35
+
+Grad overflow on iteration Using dynamic loss scale of  2.0
+Using dynamic loss scale of  2.0
+ 35
+Using dynamic loss scale of  2.0
+
+Grad overflow on iteration  35
+Using dynamic loss scale of  2.0
+
+Grad overflow on iteration 
+Grad overflow on iteration  36
+ 36
+
+Grad overflow on iteration Using dynamic loss scale of  1.0
+Using dynamic loss scale of  1.0
+ 36
+Using dynamic loss scale of  1.0
+
+Grad overflow on iteration  36
+Using dynamic loss scale of  1.0
+
+Grad overflow on iteration 
+Grad overflow on iteration  37
+
+Grad overflow on iteration  37
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+ 37
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  37
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  38
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 38
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 38
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  38
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  39
+Using dynamic loss scale of  1
+ 39
+ 39
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  39
+Using dynamic loss scale of  1
+2021-06-29 07:00:14,934 maskrcnn_benchmark.trainer INFO: eta: 0:34:06  iter: 40  loss: 160.0108 (nan)  loss_classifier: 158.6894 (nan)  loss_box_reg: 0.1505 (nan)  loss_mask: 1.0499 (5.1413)  loss_objectness: 0.2826 (1.8238)  loss_rpn_box_reg: 0.0453 (0.3016)  time: 6.7345 (5.6853)  data: 0.0036 (0.0548)  lr: 0.003840  max mem: 6279
+
+Grad overflow on iteration 
+Grad overflow on iteration  40
+ 40
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  40
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  40
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  41
+ 41
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  41
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  41
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  42
+ 42
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  42
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  42
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  43
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  43
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 43
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  43
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  44
+Using dynamic loss scale of  1
+ 44
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  44
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  44
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  45
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  45
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 45
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  45
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  46
+Using dynamic loss scale of  1
+ 46
+ 46
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  46
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  47
+ 47
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  47
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  47
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  48
+Using dynamic loss scale of  1
+ 48
+ 48
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  48
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  49
+ 49
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  49
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  49
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  50
+
+Grad overflow on iteration Using dynamic loss scale of  1
+
+Grad overflow on iteration  50
+ 50
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  50
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  51
+ 51
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  51
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  51
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  52
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  52
+ 52
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  52
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  53
+ 53
+ 53
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  53
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  54
+ 54
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  54
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  54
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  55
+Using dynamic loss scale of  1
+ 55
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  55
+Using dynamic loss scale of  1
+ 55
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  56
+ 56
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  56
+ 56
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  57
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  57
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 57
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  57
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  58
+Using dynamic loss scale of  1
+ 58
+ 58
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  58
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  59
+ 59
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  59
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  59
+Using dynamic loss scale of  1
+2021-06-29 07:02:02,132 maskrcnn_benchmark.trainer INFO: eta: 0:31:36  iter: 60  loss: nan (nan)  loss_classifier: nan (nan)  loss_box_reg: inf (nan)  loss_mask: 2.5174 (4.3528)  loss_objectness: 6.0540 (5.9795)  loss_rpn_box_reg: 1.0339 (0.8573)  time: 7.0662 (5.5769)  data: 0.0019 (0.0395)  lr: 0.005760  max mem: 6324
+
+Grad overflow on iteration 
+Grad overflow on iteration  60
+Using dynamic loss scale of  1
+ 60
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  60
+ 60
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  61
+Using dynamic loss scale of  1
+ 61
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  61
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  61
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  62
+
+Grad overflow on iteration 
+Grad overflow on iteration Using dynamic loss scale of  1
+ 62
+ 62
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  62
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  63
+Using dynamic loss scale of  1
+ 63
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  63
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  63
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  64
+ 64
+Using dynamic loss scale of  1
+ 64
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  64
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  65
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  65
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  65
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  65
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  66
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  66
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 66
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  66
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  67
+ 67
+
+Grad overflow on iteration Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+ 67
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  67
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  68
+ 68
+ 68
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  68
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  69
+ 69
+Using dynamic loss scale of  1
+ 69
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  69
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  70
+Using dynamic loss scale of  1
+ 70
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 70
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  70
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  71
+Using dynamic loss scale of  1
+ 71
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 71
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  71
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  72
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  72
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  72
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  72
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  73
+ 73
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  73
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  73
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  74
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  74
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  74
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 74
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  75
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 75
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  75
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  75
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  76
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  76
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  76
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  76
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  77
+ 77
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  77
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  77
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  78
+
+Grad overflow on iteration  78
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+ 78
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  78
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  79
+ 79
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  79
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  79
+Using dynamic loss scale of  1
+2021-06-29 07:04:08,198 maskrcnn_benchmark.trainer INFO: eta: 0:30:42  iter: 80  loss: nan (nan)  loss_classifier: nan (nan)  loss_box_reg: inf (nan)  loss_mask: 2.3847 (4.1209)  loss_objectness: 1.9103 (6.7013)  loss_rpn_box_reg: 0.2864 (1.0235)  time: 6.8432 (5.7585)  data: 0.0019 (0.0318)  lr: 0.007680  max mem: 6324
+
+Grad overflow on iteration  80
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  80
+
+Grad overflow on iteration 
+Grad overflow on iteration Using dynamic loss scale of  1
+ 80
+ 80
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  81
+Using dynamic loss scale of  1
+ 81
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  81
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  81
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  82
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  82
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  82
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  82
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  83
+ 83
+
+Grad overflow on iteration Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+ 83
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  83
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  84
+ 84
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  84
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  84
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  85
+ 85
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  85
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  85
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  86
+ 86
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  86
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  86
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  87
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 87
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 87
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  87
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  88
+ 88
+ 88
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  88
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  89
+Using dynamic loss scale of  1
+ 89
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  89
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  89
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  90
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  90
+ 90
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  90
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  91
+Using dynamic loss scale of  1
+ 91
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  91
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  91
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  92
+ 92
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  92
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  92
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  93
+ 93
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  93
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  93
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  94
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  94
+ 94
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  94
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  95
+Using dynamic loss scale of  1
+ 95
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  95
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  95
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  96
+ 96
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  96
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 96
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  97
+ 97
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  97
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  97
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  98
+ 98
+Using dynamic loss scale of  1
+ 98
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  98
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  99
+ 99
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  99
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  99
+Using dynamic loss scale of  1
+2021-06-29 07:06:06,213 maskrcnn_benchmark.trainer INFO: eta: 0:28:56  iter: 100  loss: nan (nan)  loss_classifier: nan (nan)  loss_box_reg: inf (nan)  loss_mask: 2.2881 (3.8553)  loss_objectness: 4.2545 (6.8436)  loss_rpn_box_reg: 0.8594 (1.0548)  time: 6.7546 (5.7869)  data: 0.0103 (0.0275)  lr: 0.009600  max mem: 6324
+
+Grad overflow on iteration 
+Grad overflow on iteration  100
+ 100
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  100
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  100
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  101
+ 101
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  101
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  101
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  102
+ 102
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  102
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  102
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  103
+ 103
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  103
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  103
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  104
+ 104
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  104
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  104
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  105
+ 105
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  105
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  105
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  106
+ 106
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+ 106
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  106
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  107
+ 107
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  107
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  107
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  108
+Using dynamic loss scale of  1
+ 108
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  108
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  108
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  109
+Using dynamic loss scale of  1
+ 109
+ 109
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  109
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  110
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  110
+ 110
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  110
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  111
+ 111
+Using dynamic loss scale of  1
+ 111
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  111
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  112
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  112
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  112
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  112
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  113
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  113
+ 113
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  113
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  114
+Using dynamic loss scale of  1
+ 114
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  114
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 114
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  115
+ 115
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  115
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  115
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  116
+ 116
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  116
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  116
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  117
+Using dynamic loss scale of  1
+ 117
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  117
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  117
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  118
+Using dynamic loss scale of  1
+ 118
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  118
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  118
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  119
+Using dynamic loss scale of  1
+ 119
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  119
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  119
+Using dynamic loss scale of  1
+2021-06-29 07:07:57,914 maskrcnn_benchmark.trainer INFO: eta: 0:26:50  iter: 120  loss: nan (nan)  loss_classifier: nan (nan)  loss_box_reg: inf (nan)  loss_mask: 2.5889 (3.7540)  loss_objectness: 3.4188 (6.8347)  loss_rpn_box_reg: 0.6219 (1.0646)  time: 6.8204 (5.7533)  data: 0.0017 (0.0242)  lr: 0.011520  max mem: 6324
+
+Grad overflow on iteration 
+Grad overflow on iteration  120
+ 120
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  120
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  120
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  121
+ 121
+
+Grad overflow on iteration Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+ 121
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  121
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  122
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  122
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  122
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  122
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  123
+ 123
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  123
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  123
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  124
+ 124
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+ 124
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  124
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  125
+ 125
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+ 125
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  125
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  126
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 126
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  126
+Using dynamic loss scale of  1
+ 126
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  127
+ 127
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  127
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  127
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  128
+Using dynamic loss scale of  1
+ 128
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  128
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  128
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  129
+ 129
+ 129
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  129
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  130
+ 130
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  130
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  130
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  131
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  131
+ 131
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  131
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  132
+
+Grad overflow on iteration 
+Grad overflow on iteration Using dynamic loss scale of  1
+ 132
+ 132
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  132
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  133
+ 133
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  133
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  133
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  134
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  134
+Using dynamic loss scale of  1
+ 134
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  134
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  135
+Using dynamic loss scale of  1
+ 135
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  135
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  135
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  136
+Using dynamic loss scale of  1
+ 136
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  136
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  136
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  137
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 137
+ 137
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  137
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  138
+ 138
+ 138
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  138
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  139
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  139
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  139
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  139
+Using dynamic loss scale of  1
+2021-06-29 07:09:51,913 maskrcnn_benchmark.trainer INFO: eta: 0:24:53  iter: 140  loss: nan (nan)  loss_classifier: nan (nan)  loss_box_reg: inf (nan)  loss_mask: 2.1429 (3.5728)  loss_objectness: 2.1259 (6.5859)  loss_rpn_box_reg: 0.3031 (1.0258)  time: 6.7976 (5.7457)  data: 0.0019 (0.0219)  lr: 0.013440  max mem: 6324
+
+Grad overflow on iteration 
+Grad overflow on iteration  140
+Using dynamic loss scale of  1
+ 140
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 140
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  140
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  141
+Using dynamic loss scale of  1
+ 141
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 141
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  141
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  142
+ 142
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  142
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  142
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  143
+Using dynamic loss scale of  1
+ 143
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  143
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  143
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  144
+ 144
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  144
+ 144
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  145
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  145
+ 145
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  145
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  146
+ 146
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  146
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  146
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  147
+ 147
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  147
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  147
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  148
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  148
+Using dynamic loss scale of  1
+ 148
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  148
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  149
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  149
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  149
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  149
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  150
+ 150
+ 150
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  150
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  151
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  151
+Using dynamic loss scale of  1
+ 151
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  151
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  152
+ 152
+ 152
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  152
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  153
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 153
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  153
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  153
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  154
+ 154
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  154
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  154
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  155
+
+Grad overflow on iteration  155
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+ 155
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  155
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  156
+Using dynamic loss scale of  1
+ 156
+ 156
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  156
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  157
+Using dynamic loss scale of  1
+ 157
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  157
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  157
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  158
+ 158
+ 158
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  158
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  159
+ 159
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  159
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  159
+Using dynamic loss scale of  1
+2021-06-29 07:11:41,706 maskrcnn_benchmark.trainer INFO: eta: 0:22:51  iter: 160  loss: nan (nan)  loss_classifier: nan (nan)  loss_box_reg: inf (nan)  loss_mask: 2.3703 (3.4505)  loss_objectness: 1.7122 (6.7730)  loss_rpn_box_reg: 0.2531 (1.0389)  time: 7.0868 (5.7137)  data: 0.0018 (0.0201)  lr: 0.015360  max mem: 6353
+
+Grad overflow on iteration  160
+
+Grad overflow on iteration 
+Grad overflow on iteration Using dynamic loss scale of  1
+ 160
+ 160
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  160
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  161
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 161
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  161
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  161
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  162
+Using dynamic loss scale of  1
+ 162
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 162
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  162
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  163
+Using dynamic loss scale of  1
+ 163
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  163
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  163
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  164
+ 164
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  164
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  164
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  165
+Using dynamic loss scale of  1
+ 165
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  165
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  165
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  166
+ 166
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  166
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 166
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  167
+Using dynamic loss scale of  1
+ 167
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  167
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  167
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  168
+ 168
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  168
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  168
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  169
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 169
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 169
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  169
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  170
+ 170
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  170
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  170
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  171
+ 171
+Using dynamic loss scale of  1
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 171
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  171
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  172
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  172
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 172
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  172
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  173
+ 173
+ 173
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  173
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  174
+Using dynamic loss scale of  1
+ 174
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  174
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  174
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  175
+ 175
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  175
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  175
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  176
+ 176
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  176
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  176
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  177
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  177
+ 177
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  177
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  178
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  178
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  178
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  178
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  179
+ 179
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  179
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  179
+Using dynamic loss scale of  1
+2021-06-29 07:13:28,603 maskrcnn_benchmark.trainer INFO: eta: 0:20:47  iter: 180  loss: nan (nan)  loss_classifier: nan (nan)  loss_box_reg: inf (nan)  loss_mask: 2.7122 (3.3785)  loss_objectness: 4.7878 (7.1764)  loss_rpn_box_reg: 0.7385 (1.0947)  time: 6.5649 (5.6727)  data: 0.0020 (0.0188)  lr: 0.017280  max mem: 6353
+
+Grad overflow on iteration  180
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  180
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  180
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  180
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  181
+ 181
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  181
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  181
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  182
+
+Grad overflow on iteration  182
+Using dynamic loss scale of  1
+ 182
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  182
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  183
+ 183
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  183
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  183
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  184
+ 184
+Using dynamic loss scale of  1
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 184
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  184
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  185
+ 185
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  185
+Using dynamic loss scale of  1
+ 185
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  186
+ 186
+Using dynamic loss scale of  1
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 186
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  186
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  187
+Using dynamic loss scale of  1
+ 187
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  187
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  187
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  188
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  188
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  188
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  188
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  189
+Using dynamic loss scale of  1
+ 189
+ 189
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  189
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  190
+ 190
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  190
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  190
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  191
+ 191
+Using dynamic loss scale of  1
+ 191
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  191
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  192
+Using dynamic loss scale of  1
+ 192
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 192
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  192
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  193
+ 193
+Using dynamic loss scale of  1
+ 193
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  193
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  194
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  194
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  194
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  194
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  195
+
+Grad overflow on iteration Using dynamic loss scale of  1
+
+Grad overflow on iteration  195
+Using dynamic loss scale of  1
+ 195
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  195
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  196
+ 196
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  196
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  196
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  197
+ 197
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  197
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  197
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  198
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  198
+Using dynamic loss scale of  1
+ 198
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  198
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  199
+Using dynamic loss scale of  1
+ 199
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 199
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  199
+Using dynamic loss scale of  1
+2021-06-29 07:15:14,389 maskrcnn_benchmark.trainer INFO: eta: 0:18:46  iter: 200  loss: nan (nan)  loss_classifier: nan (nan)  loss_box_reg: inf (nan)  loss_mask: 2.6380 (3.3378)  loss_objectness: 3.5230 (7.2044)  loss_rpn_box_reg: 0.3533 (1.0930)  time: 6.7842 (5.6343)  data: 0.0020 (0.0179)  lr: 0.019200  max mem: 6383
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  200
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 200
+ 200
+ 200
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  201
+Using dynamic loss scale of  1
+ 201
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  201
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  201
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  202
+ 202
+
+Grad overflow on iteration Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+ 202
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  202
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  203
+Using dynamic loss scale of  1
+ 203
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  203
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  203
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  204
+Using dynamic loss scale of  1
+ 204
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 204
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  204
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  205
+ 205
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  205
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  205
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  206
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  206
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 206
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  206
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  207
+
+Grad overflow on iteration 
+Grad overflow on iteration Using dynamic loss scale of  1
+ 207
+Using dynamic loss scale of  1
+ 207
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  207
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  208
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  208
+Using dynamic loss scale of  1
+ 208
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  208
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  209
+ 209
+
+Grad overflow on iteration Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+ 209
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  209
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  210
+Using dynamic loss scale of  1
+ 210
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  210
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  210
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  211
+Using dynamic loss scale of  1
+ 211
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  211
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  211
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  212
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  212
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  212
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  212
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  213
+Using dynamic loss scale of  1
+ 213
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  213
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  213
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  214
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  214
+ 214
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  214
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  215
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 215
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  215
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  215
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  216
+Using dynamic loss scale of  1
+ 216
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  216
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  216
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  217
+Using dynamic loss scale of  1
+ 217
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 217
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  217
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  218
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  218
+Using dynamic loss scale of  1
+ 218
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  218
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  219
+ 219
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  219
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  219
+Using dynamic loss scale of  1
+2021-06-29 07:17:06,206 maskrcnn_benchmark.trainer INFO: eta: 0:16:53  iter: 220  loss: nan (nan)  loss_classifier: nan (nan)  loss_box_reg: inf (nan)  loss_mask: 2.4707 (3.2722)  loss_objectness: 2.6547 (7.4125)  loss_rpn_box_reg: 0.5043 (1.1113)  time: 6.7921 (5.6304)  data: 0.0019 (0.0171)  lr: 0.021120  max mem: 6383
+
+Grad overflow on iteration  220
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 220
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 220
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  220
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  221
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  221
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  221
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  221
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  222
+ 222
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  222
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  222
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  223
+ 223
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  223
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  223
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  224
+Using dynamic loss scale of  1
+ 224
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  224
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  224
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  225
+Using dynamic loss scale of  1
+ 225
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 225
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  225
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  226
+Using dynamic loss scale of  1
+ 226
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 226
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  226
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  227
+ 227
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  227
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  227
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  228
+ 228
+Using dynamic loss scale of  1
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 228
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  228
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  229
+ 229
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  229
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 229
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  230
+ 230
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+ 230
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  230
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  231
+ 231
+Using dynamic loss scale of  1
+ 231
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  231
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  232
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 232
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 232
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  232
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  233
+Using dynamic loss scale of  1
+ 233
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 233
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  233
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  234
+ 234
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  234
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  234
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  235
+ 235
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+ 235
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  235
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  236
+Using dynamic loss scale of  1
+ 236
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  236
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  236
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  237
+ 237
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  237
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  237
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  238
+ 238
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  238
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  238
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  239
+Using dynamic loss scale of  1
+ 239
+ 239
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  239
+Using dynamic loss scale of  1
+2021-06-29 07:19:01,554 maskrcnn_benchmark.trainer INFO: eta: 0:15:02  iter: 240  loss: nan (nan)  loss_classifier: nan (nan)  loss_box_reg: inf (nan)  loss_mask: 2.2835 (3.2456)  loss_objectness: 4.4249 (7.5645)  loss_rpn_box_reg: 0.7040 (1.1219)  time: 6.9811 (5.6418)  data: 0.0023 (0.0164)  lr: 0.023040  max mem: 6383
+
+Grad overflow on iteration  240
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  240
+ 240
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  240
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  241
+Using dynamic loss scale of  1
+ 241
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  241
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  241
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  242
+Using dynamic loss scale of  1
+ 242
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  242
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  242
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  243
+ 243
+
+Grad overflow on iteration Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+ 243
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  243
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  244
+
+Grad overflow on iteration  244
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+ 244
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  244
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  245
+
+Grad overflow on iteration 
+Grad overflow on iteration Using dynamic loss scale of  1
+ 245
+ 245
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  245
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  246
+ 246
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  246
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  246
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  247
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  247
+Using dynamic loss scale of  1
+ 247
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  247
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  248
+ 248
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  248
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  248
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  249
+
+Grad overflow on iteration 
+Grad overflow on iteration Using dynamic loss scale of  1
+ 249
+ 249
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  249
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  250
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 250
+ 250
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  250
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  251
+ 251
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  251
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  251
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  252
+ 252
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  252
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  252
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  253
+Using dynamic loss scale of  1
+ 253
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  253
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  253
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  254
+ 254
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  254
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  254
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  255
+Using dynamic loss scale of  1
+ 255
+ 255
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  255
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  256
+Using dynamic loss scale of  1
+ 256
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 256
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  256
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  257
+ 257
+
+Grad overflow on iteration Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  257
+Using dynamic loss scale of  1
+ 257
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  258
+ 258
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  258
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  258
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  259
+ 259
+Using dynamic loss scale of  1
+ 259
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  259
+Using dynamic loss scale of  1
+2021-06-29 07:20:52,246 maskrcnn_benchmark.trainer INFO: eta: 0:13:08  iter: 260  loss: nan (nan)  loss_classifier: nan (nan)  loss_box_reg: inf (nan)  loss_mask: 2.4664 (3.2149)  loss_objectness: 6.3247 (7.6704)  loss_rpn_box_reg: 0.9120 (1.1347)  time: 6.8644 (5.6336)  data: 0.0018 (0.0157)  lr: 0.024960  max mem: 6383
+
+Grad overflow on iteration 
+Grad overflow on iteration  260
+
+Grad overflow on iteration  260
+Using dynamic loss scale of  1
+ 260
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  260
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  261
+ 261
+
+Grad overflow on iteration Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+ 261
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  261
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  262
+ 262
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  262
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  262
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  263
+ 263
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  263
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  263
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  264
+Using dynamic loss scale of  1
+ 264
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 264
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  264
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  265
+ 265
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  265
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  265
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  266
+ 266
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  266
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  266
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  267
+Using dynamic loss scale of  1
+ 267
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  267
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  267
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  268
+ 268
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  268
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  268
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  269
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  269
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 269
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  269
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  270
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 270
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  270
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  270
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  271
+ 271
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  271
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  271
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  272
+ 272
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  272
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  272
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  273
+ 273
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  273
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  273
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  274
+Using dynamic loss scale of  1
+ 274
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  274
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  274
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  275
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 275
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  275
+Using dynamic loss scale of  1
+ 275
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  276
+ 276
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  276
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  276
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  277
+ 277
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+ 277
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  277
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  278
+ 278
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  278
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  278
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  279
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 279
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 279
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  279
+Using dynamic loss scale of  1
+2021-06-29 07:22:55,632 maskrcnn_benchmark.trainer INFO: eta: 0:11:20  iter: 280  loss: nan (nan)  loss_classifier: nan (nan)  loss_box_reg: inf (nan)  loss_mask: 2.3726 (3.2027)  loss_objectness: 5.7386 (7.8254)  loss_rpn_box_reg: 0.9135 (1.1480)  time: 7.0316 (5.6718)  data: 0.0022 (0.0153)  lr: 0.026880  max mem: 6383
+
+Grad overflow on iteration 
+Grad overflow on iteration  280
+ 280
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  280
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  280
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  281
+ 281
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  281
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  281
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  282
+Using dynamic loss scale of  1
+ 282
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  282
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  282
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  283
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  283
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  283
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  283
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  284
+Using dynamic loss scale of  1
+ 284
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  284
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  284
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  285
+ 285
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  285
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  285
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  286
+ 286
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  286
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  286
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  287
+Using dynamic loss scale of  1
+ 287
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  287
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  287
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  288
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 288
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  288
+Using dynamic loss scale of  1
+ 288
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  289
+ 289
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  289
+ 289
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  290
+ 290
+Using dynamic loss scale of  1
+ 290
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  290
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  291
+Using dynamic loss scale of  1
+ 291
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  291
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 291
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  292
+Using dynamic loss scale of  1
+ 292
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  292
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 292
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  293
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 293
+ 293
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  293
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  294
+ 294
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  294
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  294
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  295
+ 295
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  295
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  295
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  296
+ 296
+Using dynamic loss scale of  1
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 296
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  296
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  297
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 297
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 297
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  297
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  298
+Using dynamic loss scale of  1
+ 298
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  298
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  298
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  299
+Using dynamic loss scale of  1
+ 299
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  299
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  299
+Using dynamic loss scale of  1
+2021-06-29 07:24:44,408 maskrcnn_benchmark.trainer INFO: eta: 0:09:25  iter: 300  loss: nan (nan)  loss_classifier: nan (nan)  loss_box_reg: inf (nan)  loss_mask: 2.6087 (3.1748)  loss_objectness: 4.5547 (7.9863)  loss_rpn_box_reg: 0.7438 (1.1752)  time: 6.9761 (5.6563)  data: 0.0088 (0.0150)  lr: 0.028800  max mem: 6383
+
+Grad overflow on iteration 
+Grad overflow on iteration  300
+Using dynamic loss scale of  1
+ 300
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  300
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  300
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  301
+ 301
+ 301
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  301
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  302
+ 302
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  302
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  302
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  303
+ 303
+Using dynamic loss scale of  1
+ 303
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  303
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  304
+ 304
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  304
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  304
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  305
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  305
+ 305
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  305
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  306
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  306
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  306
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  306
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  307
+ 307
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  307
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  307
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  308
+ 308
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  308
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  308
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  309
+ 309
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  309
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  309
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  310
+ 310
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  310
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  310
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  311
+ 311
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  311
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  311
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  312
+
+Grad overflow on iteration Using dynamic loss scale of  1
+
+Grad overflow on iteration  312
+ 312
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  312
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  313
+Using dynamic loss scale of  1
+ 313
+ 313
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  313
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  314
+ 314
+Using dynamic loss scale of  1
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 314
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  314
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  315
+Using dynamic loss scale of  1
+ 315
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  315
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  315
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  316
+Using dynamic loss scale of  1
+ 316
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  316
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  316
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  317
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  317
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 317
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  317
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  318
+ 318
+ 318
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  318
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  319
+
+Grad overflow on iteration  319
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+ 319
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  319
+Using dynamic loss scale of  1
+2021-06-29 07:26:23,288 maskrcnn_benchmark.trainer INFO: eta: 0:07:28  iter: 320  loss: nan (nan)  loss_classifier: nan (nan)  loss_box_reg: inf (nan)  loss_mask: 2.9666 (3.1694)  loss_objectness: 13.2842 (8.5630)  loss_rpn_box_reg: 1.8755 (1.2546)  time: 6.7718 (5.6118)  data: 0.0021 (0.0145)  lr: 0.030720  max mem: 6477
+
+Grad overflow on iteration 
+Grad overflow on iteration  320
+ 320
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  320
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  320
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  321
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 321
+ 321
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  321
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  322
+ 322
+Using dynamic loss scale of  1
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 322
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  322
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  323
+ 323
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+ 323
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  323
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  324
+ 324
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  324
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  324
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  325
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  325
+ 325
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  325
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  326
+Using dynamic loss scale of  1
+ 326
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  326
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  326
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  327
+ 327
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  327
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  327
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  328
+
+Grad overflow on iteration  328
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+ 328
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  328
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  329
+Using dynamic loss scale of  1
+ 329
+ 329
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  329
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  330
+Using dynamic loss scale of  1
+ 330
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  330
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  330
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  331
+ 331
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  331
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  331
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  332
+ 332
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  332
+Using dynamic loss scale of  1
+ 332
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  333
+ 333
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  333
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  333
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  334
+ 334
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  334
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  334
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  335
+Using dynamic loss scale of  1
+ 335
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  335
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  335
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  336
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  336
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  336
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  336
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  337
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  337
+Using dynamic loss scale of  1
+ 337
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  337
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  338
+ 338
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  338
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  338
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  339
+ 339
+Using dynamic loss scale of  1
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 339
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  339
+Using dynamic loss scale of  1
+2021-06-29 07:28:17,907 maskrcnn_benchmark.trainer INFO: eta: 0:05:37  iter: 340  loss: nan (nan)  loss_classifier: nan (nan)  loss_box_reg: inf (nan)  loss_mask: 2.3265 (3.1315)  loss_objectness: 1.9479 (8.5539)  loss_rpn_box_reg: 0.2030 (1.2485)  time: 7.2364 (5.6188)  data: 0.0160 (0.0144)  lr: 0.032640  max mem: 6477
+
+Grad overflow on iteration 
+Grad overflow on iteration  340
+ 340
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  340
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  340
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  341
+Using dynamic loss scale of  1
+ 341
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  341
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  341
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  342
+Using dynamic loss scale of  1
+ 342
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  342
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  342
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  343
+ 343
+Using dynamic loss scale of  1
+ 343
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  343
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  344
+ 344
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  344
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  344
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  345
+
+Grad overflow on iteration Using dynamic loss scale of  1
+
+Grad overflow on iteration  345
+ 345
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  345
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  346
+ 346
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  346
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  346
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  347
+ 347
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  347
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  347
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  348
+ 348
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  348
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  348
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  349
+ 349
+ 349
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  349
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  350
+ 350
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  350
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  350
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  351
+ 351
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  351
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  351
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  352
+ 352
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  352
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  352
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  353
+Using dynamic loss scale of  1
+ 353
+ 353
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  353
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  354
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  354
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  354
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  354
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  355
+ 355
+ 355
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  355
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  356
+ 356
+Using dynamic loss scale of  1
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 356
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  356
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  357
+ 357
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  357
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  357
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  358
+ 358
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  358
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  358
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  359
+ 359
+Using dynamic loss scale of  1
+ 359
+Using dynamic loss scale of  1
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 359
+Using dynamic loss scale of  1
+2021-06-29 07:30:15,601 maskrcnn_benchmark.trainer INFO: eta: 0:03:45  iter: 360  loss: nan (nan)  loss_classifier: nan (nan)  loss_box_reg: inf (nan)  loss_mask: 2.4331 (3.1219)  loss_objectness: 5.7476 (8.5774)  loss_rpn_box_reg: 0.9374 (1.2450)  time: 6.9491 (5.6336)  data: 0.0023 (0.0141)  lr: 0.034560  max mem: 6477
+
+Grad overflow on iteration 
+Grad overflow on iteration  360
+ 360
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  360
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  360
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  361
+ 361
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  361
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  361
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  362
+ 362
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  362
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  362
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  363
+Using dynamic loss scale of  1
+ 363
+ 363
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  363
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  364
+Using dynamic loss scale of  1
+ 364
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  364
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  364
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  365
+ 365
+ 365
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  365
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  366
+Using dynamic loss scale of  1
+ 366
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  366
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  366
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  367
+ 367
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  367
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  367
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  368
+ 368
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  368
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  368
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  369
+Using dynamic loss scale of  1
+ 369
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  369
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  369
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  370
+Using dynamic loss scale of  1
+ 370
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  370
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  370
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  371
+ 371
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  371
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  371
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  372
+ 372
+Using dynamic loss scale of  1
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 372
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  372
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  373
+Using dynamic loss scale of  1
+ 373
+ 373
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  373
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  374
+ 374
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  374
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  374
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  375
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  375
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  375
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  375
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  376
+Using dynamic loss scale of  1
+ 376
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  376
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  376
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  377
+ 377
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  377
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  377
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  378
+ 378
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  378
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  378
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  379
+ 379
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  379
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  379
+Using dynamic loss scale of  1
+2021-06-29 07:32:01,892 maskrcnn_benchmark.trainer INFO: eta: 0:01:52  iter: 380  loss: nan (nan)  loss_classifier: nan (nan)  loss_box_reg: inf (nan)  loss_mask: 2.1302 (3.0855)  loss_objectness: 4.1232 (8.4579)  loss_rpn_box_reg: 0.6993 (1.2291)  time: 6.6382 (5.6168)  data: 0.0082 (0.0139)  lr: 0.036480  max mem: 6477
+
+Grad overflow on iteration  380
+
+Grad overflow on iteration Using dynamic loss scale of  1
+
+Grad overflow on iteration  380
+Using dynamic loss scale of  1
+ 380
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  380
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  381
+Using dynamic loss scale of  1
+ 381
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  381
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  381
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  382
+ 382
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  382
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  382
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  383
+ 383
+Using dynamic loss scale of  1
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 383
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  383
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  384
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  384
+Using dynamic loss scale of  1
+ 384
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  384
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  385
+ 385
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  385
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  385
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  386
+Using dynamic loss scale of  1
+ 386
+ 386
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  386
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  387
+ 387
+ 387
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  387
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  388
+Using dynamic loss scale of  1
+ 388
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  388
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  388
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  389
+Using dynamic loss scale of  1
+ 389
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  389
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  389
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  390
+ 390
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  390
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  390
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  391
+ 391
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  391
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  391
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  392
+Using dynamic loss scale of  1
+ 392
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  392
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  392
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  393
+ 393
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  393
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  393
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  394
+ 394
+ 394
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  394
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  395
+ 395
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  395
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  395
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  396
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  396
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  396
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  396
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration 
+Grad overflow on iteration  397
+ 397
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+ 397
+
+Grad overflow on iteration Using dynamic loss scale of  1
+ 397
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  398
+ 398
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  398
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  398
+Using dynamic loss scale of  1
+
+Grad overflow on iteration 
+Grad overflow on iteration  399
+ 399
+Using dynamic loss scale of  1
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  399
+Using dynamic loss scale of  1
+
+Grad overflow on iteration  399
+Using dynamic loss scale of  1
+2021-06-29 07:33:58,690 maskrcnn_benchmark.trainer INFO: eta: 0:00:00  iter: 400  loss: nan (nan)  loss_classifier: nan (nan)  loss_box_reg: inf (nan)  loss_mask: 2.1917 (3.0485)  loss_objectness: 4.1083 (8.4030)  loss_rpn_box_reg: 0.7618 (1.2197)  time: 6.8206 (5.6279)  data: 0.0016 (0.0142)  lr: 0.038400  max mem: 6477
+2021-06-29 07:33:58,691 maskrcnn_benchmark.trainer INFO: Total training time: 0:37:31.170753 (5.6279 s / it)
+&&&& MLPERF METRIC THROUGHPUT=4.2648 iterations / s
+&&&& MLPERF METRIC THROUGHPUT=4.2636 iterations / s
+&&&& MLPERF METRIC THROUGHPUT=4.2640 iterations / s
+&&&& MLPERF METRIC THROUGHPUT=4.2644 iterations / s
+&&&& MLPERF METRIC TIME= 2273.8219470977783
+:::MLLOG {"namespace": "", "time_ms": 1624952041108, "event_type": "INTERVAL_END", "key": "run_stop", "value": null, "metadata": {"file": "tools/train_mlperf.py", "lineno": 362, "status": "aborted"}}
+&&&& MLPERF METRIC TIME= 2273.8368604183197
+&&&& MLPERF METRIC TIME= 2273.9399330615997
+&&&& MLPERF METRIC TIME= 2274.016610145569
++ ret_code=0
++ set +x
+ENDING TIMING RUN AT 2021-06-29 07:34:05 AM
+RESULT,OBJECT_DETECTION,,2280,nvidia,2021-06-29 06:56:05 AM

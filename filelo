@@ -1,0 +1,3 @@
+curl -LO https://lambdalabs-files.s3-us-west-2.amazonaws.com/bert_base/bert_base_uncased.pt
+curl -LO https://lambdalabs-files.s3-us-west-2.amazonaws.com/bert_base/bert_config.json
+wget https://lambdalabs-files.s3-us-west-2.amazonaws.com/bert_base/bert-base-uncased-vocab.txt

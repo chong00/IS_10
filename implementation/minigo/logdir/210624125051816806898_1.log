@@ -1,0 +1,139 @@
++ echo 'Beginning trial 1 of 1'
+Beginning trial 1 of 1
++ docker exec -it minigo python -c '
+import mlperf_log_utils
+from mlperf_logging.mllog import constants
+mlperf_log_utils.mlperf_submission_log(constants.MINIGO)'
+:::MLLOG {"namespace": "", "time_ms": 1624513853416, "event_type": "POINT_IN_TIME", "key": "submission_benchmark", "value": "minigo", "metadata": {"file": "/opt/reinforcement/minigo/ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624513853432, "event_type": "POINT_IN_TIME", "key": "submission_org", "value": "NVIDIA", "metadata": {"file": "/opt/reinforcement/minigo/ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624513853433, "event_type": "POINT_IN_TIME", "key": "submission_division", "value": "closed", "metadata": {"file": "/opt/reinforcement/minigo/ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624513853433, "event_type": "POINT_IN_TIME", "key": "submission_status", "value": "onprem", "metadata": {"file": "/opt/reinforcement/minigo/ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624513853433, "event_type": "POINT_IN_TIME", "key": "submission_platform", "value": "1xSUBMISSION_PLATFORM_PLACEHOLDER", "metadata": {"file": "/opt/reinforcement/minigo/ml_perf/logger.py", "lineno": 27}}
++ '[' 1 -eq 1 ']'
++ sync
++ sudo /sbin/sysctl vm.drop_caches=3
+vm.drop_caches = 3
++ docker exec -it minigo python -c '
+from mlperf_logging.mllog import constants
+from mlperf_log_utils import log_event
+log_event(key=constants.CACHE_CLEAR, value=True)'
+:::MLLOG {"namespace": "", "time_ms": 1624513858564, "event_type": "POINT_IN_TIME", "key": "cache_clear", "value": true, "metadata": {"file": "/opt/reinforcement/minigo/ml_perf/logger.py", "lineno": 27}}
++ export SEED=30242
++ SEED=30242
++ docker exec -it minigo bash -c 'DGXSYSTEM=is10 SLURM_NTASKS_PER_NODE=5                                                  mpirun --allow-run-as-root -np 5 ./run_and_time.sh'
+Run vars: id 000786 gpus 4 tasks/node 5 procs/gpu 1
+Running benchmark REINFORCEMENT - Minigo
+STARTING TIMING RUN AT 2021-06-24 05:50:58 AM
++ set -e
++ cd minigo
++ BASE_DIR=ml_perf/mpi-results/slurm-000786
++ CHECKPOINT_DIR=/data/mlperf07
++ TARGET_PATH=/data/target/target.minigo.tf
++ python3 ./ml_perf/train_loop.py --board_size=19 --base_dir=ml_perf/mpi-results/slurm-000786 --flagfile=ml_perf/flags/19/train_loop.flags --checkpoint_dir=/data/mlperf07 --target_path=/data/target/target.minigo.tf --num_gpus_train=4 --ranks_per_node=5 --procs_per_gpu=1 --use_trt=1 --verbose=0 --selfplay_threads=6 --parallel_search=8 --parallel_inference=2 --concurrent_games_per_thread=32 --train_batch_size=4096 --suggested_games_per_iteration=8192 --iterations=70
+Run vars: id 000786 gpus 4 tasks/node 5 procs/gpu 1
+Running benchmark REINFORCEMENT - Minigo
+STARTING TIMING RUN AT 2021-06-24 05:50:58 AM
++ set -e
++ cd minigo
++ BASE_DIR=ml_perf/mpi-results/slurm-000786
++ CHECKPOINT_DIR=/data/mlperf07
++ TARGET_PATH=/data/target/target.minigo.tf
++ python3 ./ml_perf/train_loop.py --board_size=19 --base_dir=ml_perf/mpi-results/slurm-000786 --flagfile=ml_perf/flags/19/train_loop.flags --checkpoint_dir=/data/mlperf07 --target_path=/data/target/target.minigo.tf --num_gpus_train=4 --ranks_per_node=5 --procs_per_gpu=1 --use_trt=1 --verbose=0 --selfplay_threads=6 --parallel_search=8 --parallel_inference=2 --concurrent_games_per_thread=32 --train_batch_size=4096 --suggested_games_per_iteration=8192 --iterations=70
+Run vars: id 000786 gpus 4 tasks/node 5 procs/gpu 1
+Running benchmark REINFORCEMENT - Minigo
+Run vars: id 000786 gpus 4 tasks/node 5 procs/gpu 1
+Running benchmark REINFORCEMENT - Minigo
++ set -e
++ cd minigo
++ BASE_DIR=ml_perf/mpi-results/slurm-000786
++ CHECKPOINT_DIR=/data/mlperf07
++ TARGET_PATH=/data/target/target.minigo.tf
++ python3 ./ml_perf/train_loop.py --board_size=19 --base_dir=ml_perf/mpi-results/slurm-000786 --flagfile=ml_perf/flags/19/train_loop.flags --checkpoint_dir=/data/mlperf07 --target_path=/data/target/target.minigo.tf --num_gpus_train=4 --ranks_per_node=5 --procs_per_gpu=1 --use_trt=1 --verbose=0 --selfplay_threads=6 --parallel_search=8 --parallel_inference=2 --concurrent_games_per_thread=32 --train_batch_size=4096 --suggested_games_per_iteration=8192 --iterations=70
+STARTING TIMING RUN AT 2021-06-24 05:50:58 AM
+STARTING TIMING RUN AT 2021-06-24 05:50:58 AM
++ set -e
++ cd minigo
++ BASE_DIR=ml_perf/mpi-results/slurm-000786
++ CHECKPOINT_DIR=/data/mlperf07
++ TARGET_PATH=/data/target/target.minigo.tf
++ python3 ./ml_perf/train_loop.py --board_size=19 --base_dir=ml_perf/mpi-results/slurm-000786 --flagfile=ml_perf/flags/19/train_loop.flags --checkpoint_dir=/data/mlperf07 --target_path=/data/target/target.minigo.tf --num_gpus_train=4 --ranks_per_node=5 --procs_per_gpu=1 --use_trt=1 --verbose=0 --selfplay_threads=6 --parallel_search=8 --parallel_inference=2 --concurrent_games_per_thread=32 --train_batch_size=4096 --suggested_games_per_iteration=8192 --iterations=70
+Run vars: id 000786 gpus 4 tasks/node 5 procs/gpu 1
+Running benchmark REINFORCEMENT - Minigo
+STARTING TIMING RUN AT 2021-06-24 05:50:58 AM
++ set -e
++ cd minigo
++ BASE_DIR=ml_perf/mpi-results/slurm-000786
++ CHECKPOINT_DIR=/data/mlperf07
++ TARGET_PATH=/data/target/target.minigo.tf
++ python3 ./ml_perf/train_loop.py --board_size=19 --base_dir=ml_perf/mpi-results/slurm-000786 --flagfile=ml_perf/flags/19/train_loop.flags --checkpoint_dir=/data/mlperf07 --target_path=/data/target/target.minigo.tf --num_gpus_train=4 --ranks_per_node=5 --procs_per_gpu=1 --use_trt=1 --verbose=0 --selfplay_threads=6 --parallel_search=8 --parallel_inference=2 --concurrent_games_per_thread=32 --train_batch_size=4096 --suggested_games_per_iteration=8192 --iterations=70
+AAAAAAAAAAAAAAAAAAAAAAAAAAAA 3 5
+AAAAAAAAAAAAAAAAAAAAAAAAAAAA 4 5
+AAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 5
+[]
+[]
+[]
+Traceback (most recent call last):
+  File "./ml_perf/train_loop.py", line 992, in <module>
+    app.run(main)
+  File "/usr/local/lib/python3.6/dist-packages/absl/app.py", line 299, in run
+    _run_main(main, args)
+  File "/usr/local/lib/python3.6/dist-packages/absl/app.py", line 250, in _run_main
+    sys.exit(main(argv))
+  File "./ml_perf/train_loop.py", line 869, in main
+    selfplay_ranks, selfplay_data_transfer_ranks = distribute_mpiranks(rank, size)
+TypeError: 'NoneType' object is not iterable
+Traceback (most recent call last):
+  File "./ml_perf/train_loop.py", line 992, in <module>
+    app.run(main)
+  File "/usr/local/lib/python3.6/dist-packages/absl/app.py", line 299, in run
+    _run_main(main, args)
+  File "/usr/local/lib/python3.6/dist-packages/absl/app.py", line 250, in _run_main
+    sys.exit(main(argv))
+  File "./ml_perf/train_loop.py", line 869, in main
+    selfplay_ranks, selfplay_data_transfer_ranks = distribute_mpiranks(rank, size)
+TypeError: 'NoneType' object is not iterable
+Traceback (most recent call last):
+  File "./ml_perf/train_loop.py", line 992, in <module>
+    app.run(main)
+  File "/usr/local/lib/python3.6/dist-packages/absl/app.py", line 299, in run
+    _run_main(main, args)
+  File "/usr/local/lib/python3.6/dist-packages/absl/app.py", line 250, in _run_main
+    sys.exit(main(argv))
+  File "./ml_perf/train_loop.py", line 869, in main
+    selfplay_ranks, selfplay_data_transfer_ranks = distribute_mpiranks(rank, size)
+TypeError: 'NoneType' object is not iterable
+AAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 5
+[]
+Traceback (most recent call last):
+  File "./ml_perf/train_loop.py", line 992, in <module>
+    app.run(main)
+  File "/usr/local/lib/python3.6/dist-packages/absl/app.py", line 299, in run
+    _run_main(main, args)
+  File "/usr/local/lib/python3.6/dist-packages/absl/app.py", line 250, in _run_main
+    sys.exit(main(argv))
+  File "./ml_perf/train_loop.py", line 869, in main
+    selfplay_ranks, selfplay_data_transfer_ranks = distribute_mpiranks(rank, size)
+TypeError: 'NoneType' object is not iterable
+AAAAAAAAAAAAAAAAAAAAAAAAAAAA 2 5
+[]
+Traceback (most recent call last):
+  File "./ml_perf/train_loop.py", line 992, in <module>
+    app.run(main)
+  File "/usr/local/lib/python3.6/dist-packages/absl/app.py", line 299, in run
+    _run_main(main, args)
+  File "/usr/local/lib/python3.6/dist-packages/absl/app.py", line 250, in _run_main
+    sys.exit(main(argv))
+  File "./ml_perf/train_loop.py", line 869, in main
+    selfplay_ranks, selfplay_data_transfer_ranks = distribute_mpiranks(rank, size)
+TypeError: 'NoneType' object is not iterable
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[19807,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------

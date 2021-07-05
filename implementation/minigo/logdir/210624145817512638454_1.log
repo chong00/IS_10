@@ -1,0 +1,98 @@
++ echo 'Beginning trial 1 of 1'
+Beginning trial 1 of 1
++ docker exec -it minigo python -c '
+import mlperf_log_utils
+from mlperf_logging.mllog import constants
+mlperf_log_utils.mlperf_submission_log(constants.MINIGO)'
+:::MLLOG {"namespace": "", "time_ms": 1624521498725, "event_type": "POINT_IN_TIME", "key": "submission_benchmark", "value": "minigo", "metadata": {"file": "/opt/reinforcement/minigo/ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624521498744, "event_type": "POINT_IN_TIME", "key": "submission_org", "value": "NVIDIA", "metadata": {"file": "/opt/reinforcement/minigo/ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624521498744, "event_type": "POINT_IN_TIME", "key": "submission_division", "value": "closed", "metadata": {"file": "/opt/reinforcement/minigo/ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624521498744, "event_type": "POINT_IN_TIME", "key": "submission_status", "value": "onprem", "metadata": {"file": "/opt/reinforcement/minigo/ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624521498744, "event_type": "POINT_IN_TIME", "key": "submission_platform", "value": "1xSUBMISSION_PLATFORM_PLACEHOLDER", "metadata": {"file": "/opt/reinforcement/minigo/ml_perf/logger.py", "lineno": 27}}
++ '[' 1 -eq 1 ']'
++ sync
++ sudo /sbin/sysctl vm.drop_caches=3
+vm.drop_caches = 3
++ docker exec -it minigo python -c '
+from mlperf_logging.mllog import constants
+from mlperf_log_utils import log_event
+log_event(key=constants.CACHE_CLEAR, value=True)'
+:::MLLOG {"namespace": "", "time_ms": 1624521505227, "event_type": "POINT_IN_TIME", "key": "cache_clear", "value": true, "metadata": {"file": "/opt/reinforcement/minigo/ml_perf/logger.py", "lineno": 27}}
++ export SEED=22537
++ SEED=22537
++ docker exec -it minigo bash -c 'DGXSYSTEM=is10 SLURM_NTASKS_PER_NODE=5                                                  mpirun --allow-run-as-root -np 5 ./run_and_time.sh'
+Run vars: id 000786 gpus 4 tasks/node 5 procs/gpu 1
+Running benchmark REINFORCEMENT - Minigo
+Run vars: id 000786 gpus 4 tasks/node 5 procs/gpu 1
+Running benchmark REINFORCEMENT - Minigo
+Run vars: id 000786 gpus 4 tasks/node 5 procs/gpu 1
+Running benchmark REINFORCEMENT - Minigo
+Run vars: id 000786 gpus 4 tasks/node 5 procs/gpu 1
+Running benchmark REINFORCEMENT - Minigo
+STARTING TIMING RUN AT 2021-06-24 07:58:25 AM
+STARTING TIMING RUN AT 2021-06-24 07:58:25 AM
+STARTING TIMING RUN AT 2021-06-24 07:58:25 AM
+Run vars: id 000786 gpus 4 tasks/node 5 procs/gpu 1
+Running benchmark REINFORCEMENT - Minigo
++ set -e
++ cd minigo
++ set -e
++ cd minigo
++ set -e
++ cd minigo
++ BASE_DIR=ml_perf/mpi-results/slurm-000786
++ BASE_DIR=ml_perf/mpi-results/slurm-000786
++ CHECKPOINT_DIR=/data/mlperf07
+STARTING TIMING RUN AT 2021-06-24 07:58:25 AM
++ set -e
++ CHECKPOINT_DIR=/data/mlperf07
++ TARGET_PATH=/data/target/target.minigo.tf
++ TARGET_PATH=/data/target/target.minigo.tf
++ BASE_DIR=ml_perf/mpi-results/slurm-000786
++ CHECKPOINT_DIR=/data/mlperf07
++ cd minigo
++ TARGET_PATH=/data/target/target.minigo.tf
++ BASE_DIR=ml_perf/mpi-results/slurm-000786
++ CHECKPOINT_DIR=/data/mlperf07
++ TARGET_PATH=/data/target/target.minigo.tf
++ python3 ./ml_perf/train_loop.py --board_size=19 --base_dir=ml_perf/mpi-results/slurm-000786 --flagfile=ml_perf/flags/19/train_loop.flags --checkpoint_dir=/data/mlperf07 --target_path=/data/target/target.minigo.tf --num_gpus_train=2 --ranks_per_node=5 --procs_per_gpu=1 --use_trt=1 --verbose=0 --selfplay_threads=6 --parallel_search=8 --parallel_inference=2 --concurrent_games_per_thread=32 --train_batch_size=4096 --suggested_games_per_iteration=8192 --iterations=70
++ python3 ./ml_perf/train_loop.py --board_size=19 --base_dir=ml_perf/mpi-results/slurm-000786 --flagfile=ml_perf/flags/19/train_loop.flags --checkpoint_dir=/data/mlperf07 --target_path=/data/target/target.minigo.tf --num_gpus_train=2 --ranks_per_node=5 --procs_per_gpu=1 --use_trt=1 --verbose=0 --selfplay_threads=6 --parallel_search=8 --parallel_inference=2 --concurrent_games_per_thread=32 --train_batch_size=4096 --suggested_games_per_iteration=8192 --iterations=70
++ python3 ./ml_perf/train_loop.py --board_size=19 --base_dir=ml_perf/mpi-results/slurm-000786 --flagfile=ml_perf/flags/19/train_loop.flags --checkpoint_dir=/data/mlperf07 --target_path=/data/target/target.minigo.tf --num_gpus_train=2 --ranks_per_node=5 --procs_per_gpu=1 --use_trt=1 --verbose=0 --selfplay_threads=6 --parallel_search=8 --parallel_inference=2 --concurrent_games_per_thread=32 --train_batch_size=4096 --suggested_games_per_iteration=8192 --iterations=70
++ python3 ./ml_perf/train_loop.py --board_size=19 --base_dir=ml_perf/mpi-results/slurm-000786 --flagfile=ml_perf/flags/19/train_loop.flags --checkpoint_dir=/data/mlperf07 --target_path=/data/target/target.minigo.tf --num_gpus_train=2 --ranks_per_node=5 --procs_per_gpu=1 --use_trt=1 --verbose=0 --selfplay_threads=6 --parallel_search=8 --parallel_inference=2 --concurrent_games_per_thread=32 --train_batch_size=4096 --suggested_games_per_iteration=8192 --iterations=70
+STARTING TIMING RUN AT 2021-06-24 07:58:25 AM
++ set -e
++ cd minigo
++ BASE_DIR=ml_perf/mpi-results/slurm-000786
++ CHECKPOINT_DIR=/data/mlperf07
++ TARGET_PATH=/data/target/target.minigo.tf
++ python3 ./ml_perf/train_loop.py --board_size=19 --base_dir=ml_perf/mpi-results/slurm-000786 --flagfile=ml_perf/flags/19/train_loop.flags --checkpoint_dir=/data/mlperf07 --target_path=/data/target/target.minigo.tf --num_gpus_train=2 --ranks_per_node=5 --procs_per_gpu=1 --use_trt=1 --verbose=0 --selfplay_threads=6 --parallel_search=8 --parallel_inference=2 --concurrent_games_per_thread=32 --train_batch_size=4096 --suggested_games_per_iteration=8192 --iterations=70
+:::MLLOG {"namespace": "", "time_ms": 1624521509476, "event_type": "INTERVAL_START", "key": "init_start", "value": null, "metadata": {"file": "./ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624521626166, "event_type": "POINT_IN_TIME", "key": "lr_rates", "value": [0.016, 0.16, 0.016, 0.0016], "metadata": {"file": "./ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624521626167, "event_type": "POINT_IN_TIME", "key": "lr_boundaries", "value": [128, 10000, 20000], "metadata": {"file": "./ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624521626167, "event_type": "POINT_IN_TIME", "key": "train_batch_size", "value": 4096, "metadata": {"file": "./ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624521626167, "event_type": "POINT_IN_TIME", "key": "virtual_losses", "value": 4, "metadata": {"file": "./ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624521626167, "event_type": "POINT_IN_TIME", "key": "seed", "value": 0, "metadata": {"file": "./ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624521626167, "event_type": "POINT_IN_TIME", "key": "opt_weight_decay", "value": 0.0001, "metadata": {"file": "./ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624521626167, "event_type": "POINT_IN_TIME", "key": "filter_amount", "value": 0.3, "metadata": {"file": "./ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624521626167, "event_type": "POINT_IN_TIME", "key": "num_readouts", "value": 800, "metadata": {"file": "./ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624521626168, "event_type": "POINT_IN_TIME", "key": "value_init_penalty", "value": 0.2, "metadata": {"file": "./ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624521626168, "event_type": "POINT_IN_TIME", "key": "holdout_pct", "value": 0.0, "metadata": {"file": "./ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624521626168, "event_type": "POINT_IN_TIME", "key": "disable_resign_pct", "value": 0.0, "metadata": {"file": "./ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624521626168, "event_type": "POINT_IN_TIME", "key": "resign_threshold", "value": -0.999, "metadata": {"file": "./ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624521626168, "event_type": "POINT_IN_TIME", "key": "virtual_losses", "value": 4, "metadata": {"file": "./ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624521626168, "event_type": "POINT_IN_TIME", "key": "min_selfplay_games_per_generation", "value": 8192, "metadata": {"file": "./ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624521626168, "event_type": "POINT_IN_TIME", "key": "value_init_penalty", "value": 0.2, "metadata": {"file": "./ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624521626169, "event_type": "POINT_IN_TIME", "key": "window_size", "value": 5, "metadata": {"file": "./ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624521626169, "event_type": "POINT_IN_TIME", "key": "eval_games", "value": 256, "metadata": {"file": "./ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624521630096, "event_type": "INTERVAL_END", "key": "init_stop", "value": null, "metadata": {"file": "./ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624521630123, "event_type": "INTERVAL_START", "key": "run_start", "value": null, "metadata": {"file": "./ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624521630123, "event_type": "INTERVAL_START", "key": "epoch_start", "value": null, "metadata": {"file": "./ml_perf/logger.py", "lineno": 27, "epoch_num": 18}}
+:::MLLOG {"namespace": "", "time_ms": 1624521630409, "event_type": "POINT_IN_TIME", "key": "actual_selfplay_games_per_generation", "value": 9240, "metadata": {"file": "./ml_perf/logger.py", "lineno": 27, "epoch_num": 18}}
+:::MLLOG {"namespace": "", "time_ms": 1624521630410, "event_type": "POINT_IN_TIME", "key": "actual_selfplay_games_per_generation", "value": 9236, "metadata": {"file": "./ml_perf/logger.py", "lineno": 27, "epoch_num": 18}}
+:::MLLOG {"namespace": "", "time_ms": 1624521630410, "event_type": "POINT_IN_TIME", "key": "actual_selfplay_games_per_generation", "value": 9258, "metadata": {"file": "./ml_perf/logger.py", "lineno": 27, "epoch_num": 18}}
+:::MLLOG {"namespace": "", "time_ms": 1624521630410, "event_type": "POINT_IN_TIME", "key": "actual_selfplay_games_per_generation", "value": 9261, "metadata": {"file": "./ml_perf/logger.py", "lineno": 27, "epoch_num": 18}}
+:::MLLOG {"namespace": "", "time_ms": 1624521630410, "event_type": "POINT_IN_TIME", "key": "actual_selfplay_games_per_generation", "value": 9212, "metadata": {"file": "./ml_perf/logger.py", "lineno": 27, "epoch_num": 18}}
+:::MLLOG {"namespace": "", "time_ms": 1624521785887, "event_type": "POINT_IN_TIME", "key": "save_model", "value": {"iteration": 18}, "metadata": {"file": "./ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624521785898, "event_type": "INTERVAL_END", "key": "epoch_stop", "value": null, "metadata": {"file": "./ml_perf/logger.py", "lineno": 27, "epoch_num": 18}}
+:::MLLOG {"namespace": "", "time_ms": 1624521785899, "event_type": "INTERVAL_START", "key": "epoch_start", "value": null, "metadata": {"file": "./ml_perf/logger.py", "lineno": 27, "epoch_num": 19}}
+^C

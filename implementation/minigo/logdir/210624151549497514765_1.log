@@ -1,0 +1,52 @@
++ echo 'Beginning trial 1 of 1'
+Beginning trial 1 of 1
++ docker exec -it minigo python -c '
+import mlperf_log_utils
+from mlperf_logging.mllog import constants
+mlperf_log_utils.mlperf_submission_log(constants.MINIGO)'
+:::MLLOG {"namespace": "", "time_ms": 1624522550744, "event_type": "POINT_IN_TIME", "key": "submission_benchmark", "value": "minigo", "metadata": {"file": "/opt/reinforcement/minigo/ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624522550760, "event_type": "POINT_IN_TIME", "key": "submission_org", "value": "NVIDIA", "metadata": {"file": "/opt/reinforcement/minigo/ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624522550760, "event_type": "POINT_IN_TIME", "key": "submission_division", "value": "closed", "metadata": {"file": "/opt/reinforcement/minigo/ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624522550760, "event_type": "POINT_IN_TIME", "key": "submission_status", "value": "onprem", "metadata": {"file": "/opt/reinforcement/minigo/ml_perf/logger.py", "lineno": 27}}
+:::MLLOG {"namespace": "", "time_ms": 1624522550760, "event_type": "POINT_IN_TIME", "key": "submission_platform", "value": "1xSUBMISSION_PLATFORM_PLACEHOLDER", "metadata": {"file": "/opt/reinforcement/minigo/ml_perf/logger.py", "lineno": 27}}
++ '[' 1 -eq 1 ']'
++ sync
++ sudo /sbin/sysctl vm.drop_caches=3
+vm.drop_caches = 3
++ docker exec -it minigo python -c '
+from mlperf_logging.mllog import constants
+from mlperf_log_utils import log_event
+log_event(key=constants.CACHE_CLEAR, value=True)'
+:::MLLOG {"namespace": "", "time_ms": 1624522556249, "event_type": "POINT_IN_TIME", "key": "cache_clear", "value": true, "metadata": {"file": "/opt/reinforcement/minigo/ml_perf/logger.py", "lineno": 27}}
++ export SEED=31172
++ SEED=31172
++ docker exec -it minigo bash -c 'DGXSYSTEM=is10 SLURM_NTASKS_PER_NODE=9                                                  mpirun --allow-run-as-root -np 9 ./run_and_time.sh'
+--------------------------------------------------------------------------
+There are not enough slots available in the system to satisfy the 9
+slots that were requested by the application:
+
+  ./run_and_time.sh
+
+Either request fewer slots for your application, or make more slots
+available for use.
+
+A "slot" is the Open MPI term for an allocatable unit where we can
+launch a process.  The number of slots available are defined by the
+environment in which Open MPI processes are run:
+
+  1. Hostfile, via "slots=N" clauses (N defaults to number of
+     processor cores if not provided)
+  2. The --host command line parameter, via a ":N" suffix on the
+     hostname (N defaults to 1 if not provided)
+  3. Resource manager (e.g., SLURM, PBS/Torque, LSF, etc.)
+  4. If none of a hostfile, the --host command line parameter, or an
+     RM is present, Open MPI defaults to the number of processor cores
+
+In all the above cases, if you want Open MPI to default to the number
+of hardware threads instead of the number of processor cores, use the
+--use-hwthread-cpus option.
+
+Alternatively, you can use the --oversubscribe option to ignore the
+number of available slots when deciding the number of processes to
+launch.
+--------------------------------------------------------------------------

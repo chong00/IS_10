@@ -3,7 +3,7 @@
 for i in {1..10}
 do
 #	echo "#$i run start"
-	hashcat -b > run_2/hashcatgui\-$i
+	hashcat -b > max_fan/hashcatgui\-$i
 #	git add *
 #	git commit -am "update"
 #	git push

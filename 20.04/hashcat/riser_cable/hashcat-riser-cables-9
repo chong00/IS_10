@@ -1,0 +1,34 @@
+hashcat (v5.1.0) starting in benchmark mode...
+
+[33mBenchmarking uses hand-optimized kernel code by default.[0m
+[33mYou can use it in your cracking session by setting the -O option.[0m
+[33mNote: Using optimized kernel code limits the maximum supported password length.[0m
+[33mTo disable the optimized kernel code in benchmark mode, use the -w option.[0m
+[33m[0m
+[33m* Device #1: WARNING! Kernel exec timeout is not disabled.[0m
+[33m             This may cause "CL_OUT_OF_RESOURCES" or related errors.[0m
+[33m             To disable the timeout, see: https://hashcat.net/q/timeoutpatch[0m
+[33m* Device #2: WARNING! Kernel exec timeout is not disabled.[0m
+[33m             This may cause "CL_OUT_OF_RESOURCES" or related errors.[0m
+[33m             To disable the timeout, see: https://hashcat.net/q/timeoutpatch[0m
+[33m* Device #3: WARNING! Kernel exec timeout is not disabled.[0m
+[33m             This may cause "CL_OUT_OF_RESOURCES" or related errors.[0m
+[33m             To disable the timeout, see: https://hashcat.net/q/timeoutpatch[0m
+[33m* Device #4: WARNING! Kernel exec timeout is not disabled.[0m
+[33m             This may cause "CL_OUT_OF_RESOURCES" or related errors.[0m
+[33m             To disable the timeout, see: https://hashcat.net/q/timeoutpatch[0m
+OpenCL Platform #1: NVIDIA Corporation
+======================================
+* Device #1: NVIDIA GeForce GTX 1080 Ti, 2794/11177 MB allocatable, 28MCU
+* Device #2: NVIDIA GeForce GTX 1080 Ti, 2794/11178 MB allocatable, 28MCU
+* Device #3: NVIDIA GeForce GTX 1080 Ti, 2794/11178 MB allocatable, 28MCU
+* Device #4: NVIDIA GeForce GTX 1080 Ti, 2794/11178 MB allocatable, 28MCU
+
+Benchmark relevant options:
+===========================
+* --optimized-kernel-enable
+
+Hashmode: 0 - MD5
+
+Started: Wed Jul 14 12:52:26 2021
+[2KStopped: Wed Jul 14 12:53:02 2021

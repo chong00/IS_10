@@ -32,7 +32,7 @@ import re
 # 	file.close()
 # 	print(f"nogui {i}")
 
-for i in range(1,8):
+for i in range(9,11):
 	file = open(f'riser_cable/hashcat-riser-cables-{i}',mode='r')
 	text = file.read()
 	file.close()

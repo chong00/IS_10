@@ -1,5 +1,7 @@
 #!/bin/bash
-cd /home/is-10/Desktop/IS_10/20.04/hashcat/output/
+cd /home/is-10/Desktop/IS_10/20.04/hashcat/
+mkdir riser_cable
+cd riser_cable
 for i in {1..10}
 do
 	echo "#$i run start"

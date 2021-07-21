@@ -1,0 +1,132 @@
+[CUDA Bandwidth Test] - Starting...
+Running on...
+
+ Device 2: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+bandwidthTest-H2D-Pinned, Bandwidth = 11632.9 MB/s, Time = 0.00275 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2H-Pinned, Bandwidth = 12818.1 MB/s, Time = 0.00250 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2D, Bandwidth = 346660.3 MB/s, Time = 0.00009 s, Size = 33554432 bytes, NumDevsUsed = 1
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+[CUDA Bandwidth Test] - Starting...
+Running on...
+
+ Device 2: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+bandwidthTest-H2D-Pinned, Bandwidth = 11610.9 MB/s, Time = 0.00276 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2H-Pinned, Bandwidth = 12816.7 MB/s, Time = 0.00250 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2D, Bandwidth = 347531.0 MB/s, Time = 0.00009 s, Size = 33554432 bytes, NumDevsUsed = 1
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+[CUDA Bandwidth Test] - Starting...
+Running on...
+
+ Device 2: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+bandwidthTest-H2D-Pinned, Bandwidth = 11693.6 MB/s, Time = 0.00274 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2H-Pinned, Bandwidth = 12841.9 MB/s, Time = 0.00249 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2D, Bandwidth = 346244.2 MB/s, Time = 0.00009 s, Size = 33554432 bytes, NumDevsUsed = 1
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+[CUDA Bandwidth Test] - Starting...
+Running on...
+
+ Device 2: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+bandwidthTest-H2D-Pinned, Bandwidth = 11694.8 MB/s, Time = 0.00274 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2H-Pinned, Bandwidth = 12842.3 MB/s, Time = 0.00249 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2D, Bandwidth = 346484.4 MB/s, Time = 0.00009 s, Size = 33554432 bytes, NumDevsUsed = 1
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+[CUDA Bandwidth Test] - Starting...
+Running on...
+
+ Device 2: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+bandwidthTest-H2D-Pinned, Bandwidth = 11632.0 MB/s, Time = 0.00275 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2H-Pinned, Bandwidth = 12843.8 MB/s, Time = 0.00249 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2D, Bandwidth = 347318.8 MB/s, Time = 0.00009 s, Size = 33554432 bytes, NumDevsUsed = 1
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+[CUDA Bandwidth Test] - Starting...
+Running on...
+
+ Device 2: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+bandwidthTest-H2D-Pinned, Bandwidth = 11696.8 MB/s, Time = 0.00274 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2H-Pinned, Bandwidth = 12842.3 MB/s, Time = 0.00249 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2D, Bandwidth = 346127.2 MB/s, Time = 0.00009 s, Size = 33554432 bytes, NumDevsUsed = 1
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+[CUDA Bandwidth Test] - Starting...
+Running on...
+
+ Device 2: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+bandwidthTest-H2D-Pinned, Bandwidth = 11697.8 MB/s, Time = 0.00274 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2H-Pinned, Bandwidth = 12842.5 MB/s, Time = 0.00249 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2D, Bandwidth = 346472.7 MB/s, Time = 0.00009 s, Size = 33554432 bytes, NumDevsUsed = 1
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+[CUDA Bandwidth Test] - Starting...
+Running on...
+
+ Device 2: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+bandwidthTest-H2D-Pinned, Bandwidth = 11691.1 MB/s, Time = 0.00274 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2H-Pinned, Bandwidth = 12842.2 MB/s, Time = 0.00249 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2D, Bandwidth = 347130.4 MB/s, Time = 0.00009 s, Size = 33554432 bytes, NumDevsUsed = 1
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+[CUDA Bandwidth Test] - Starting...
+Running on...
+
+ Device 2: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+bandwidthTest-H2D-Pinned, Bandwidth = 11698.7 MB/s, Time = 0.00274 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2H-Pinned, Bandwidth = 12842.3 MB/s, Time = 0.00249 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2D, Bandwidth = 347089.2 MB/s, Time = 0.00009 s, Size = 33554432 bytes, NumDevsUsed = 1
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+[CUDA Bandwidth Test] - Starting...
+Running on...
+
+ Device 2: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+bandwidthTest-H2D-Pinned, Bandwidth = 11686.9 MB/s, Time = 0.00274 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2H-Pinned, Bandwidth = 12848.0 MB/s, Time = 0.00249 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2D, Bandwidth = 347177.5 MB/s, Time = 0.00009 s, Size = 33554432 bytes, NumDevsUsed = 1
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+[CUDA Bandwidth Test] - Starting...
+Running on...
+
+ Device 2: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+bandwidthTest-H2D-Pinned, Bandwidth = 11685.1 MB/s, Time = 0.00274 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2H-Pinned, Bandwidth = 12805.0 MB/s, Time = 0.00250 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2D, Bandwidth = 346977.5 MB/s, Time = 0.00009 s, Size = 33554432 bytes, NumDevsUsed = 1
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.

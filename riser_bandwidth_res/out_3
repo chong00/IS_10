@@ -1,0 +1,132 @@
+[CUDA Bandwidth Test] - Starting...
+Running on...
+
+ Device 3: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+bandwidthTest-H2D-Pinned, Bandwidth = 702.6 MB/s, Time = 0.04554 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2H-Pinned, Bandwidth = 658.7 MB/s, Time = 0.04858 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2D, Bandwidth = 343739.5 MB/s, Time = 0.00009 s, Size = 33554432 bytes, NumDevsUsed = 1
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+[CUDA Bandwidth Test] - Starting...
+Running on...
+
+ Device 3: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+bandwidthTest-H2D-Pinned, Bandwidth = 710.0 MB/s, Time = 0.04507 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2H-Pinned, Bandwidth = 672.7 MB/s, Time = 0.04757 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2D, Bandwidth = 344676.7 MB/s, Time = 0.00009 s, Size = 33554432 bytes, NumDevsUsed = 1
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+[CUDA Bandwidth Test] - Starting...
+Running on...
+
+ Device 3: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+bandwidthTest-H2D-Pinned, Bandwidth = 709.0 MB/s, Time = 0.04513 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2H-Pinned, Bandwidth = 672.3 MB/s, Time = 0.04760 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2D, Bandwidth = 343797.2 MB/s, Time = 0.00009 s, Size = 33554432 bytes, NumDevsUsed = 1
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+[CUDA Bandwidth Test] - Starting...
+Running on...
+
+ Device 3: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+bandwidthTest-H2D-Pinned, Bandwidth = 709.1 MB/s, Time = 0.04513 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2H-Pinned, Bandwidth = 673.7 MB/s, Time = 0.04750 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2D, Bandwidth = 340816.4 MB/s, Time = 0.00009 s, Size = 33554432 bytes, NumDevsUsed = 1
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+[CUDA Bandwidth Test] - Starting...
+Running on...
+
+ Device 3: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+bandwidthTest-H2D-Pinned, Bandwidth = 714.1 MB/s, Time = 0.04481 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2H-Pinned, Bandwidth = 672.3 MB/s, Time = 0.04760 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2D, Bandwidth = 344005.1 MB/s, Time = 0.00009 s, Size = 33554432 bytes, NumDevsUsed = 1
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+[CUDA Bandwidth Test] - Starting...
+Running on...
+
+ Device 3: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+bandwidthTest-H2D-Pinned, Bandwidth = 706.5 MB/s, Time = 0.04530 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2H-Pinned, Bandwidth = 671.0 MB/s, Time = 0.04769 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2D, Bandwidth = 346179.8 MB/s, Time = 0.00009 s, Size = 33554432 bytes, NumDevsUsed = 1
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+[CUDA Bandwidth Test] - Starting...
+Running on...
+
+ Device 3: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+bandwidthTest-H2D-Pinned, Bandwidth = 708.5 MB/s, Time = 0.04516 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2H-Pinned, Bandwidth = 668.2 MB/s, Time = 0.04789 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2D, Bandwidth = 344670.9 MB/s, Time = 0.00009 s, Size = 33554432 bytes, NumDevsUsed = 1
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+[CUDA Bandwidth Test] - Starting...
+Running on...
+
+ Device 3: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+bandwidthTest-H2D-Pinned, Bandwidth = 701.7 MB/s, Time = 0.04561 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2H-Pinned, Bandwidth = 671.7 MB/s, Time = 0.04764 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2D, Bandwidth = 344885.7 MB/s, Time = 0.00009 s, Size = 33554432 bytes, NumDevsUsed = 1
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+[CUDA Bandwidth Test] - Starting...
+Running on...
+
+ Device 3: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+bandwidthTest-H2D-Pinned, Bandwidth = 701.8 MB/s, Time = 0.04560 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2H-Pinned, Bandwidth = 661.8 MB/s, Time = 0.04836 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2D, Bandwidth = 345689.0 MB/s, Time = 0.00009 s, Size = 33554432 bytes, NumDevsUsed = 1
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+[CUDA Bandwidth Test] - Starting...
+Running on...
+
+ Device 3: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+bandwidthTest-H2D-Pinned, Bandwidth = 706.0 MB/s, Time = 0.04533 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2H-Pinned, Bandwidth = 655.4 MB/s, Time = 0.04882 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2D, Bandwidth = 344926.3 MB/s, Time = 0.00009 s, Size = 33554432 bytes, NumDevsUsed = 1
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+[CUDA Bandwidth Test] - Starting...
+Running on...
+
+ Device 3: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+bandwidthTest-H2D-Pinned, Bandwidth = 705.5 MB/s, Time = 0.04536 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2H-Pinned, Bandwidth = 663.1 MB/s, Time = 0.04826 s, Size = 33554432 bytes, NumDevsUsed = 1
+bandwidthTest-D2D, Bandwidth = 343872.3 MB/s, Time = 0.00009 s, Size = 33554432 bytes, NumDevsUsed = 1
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.

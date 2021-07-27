@@ -1,0 +1,330 @@
+[CUDA Bandwidth Test] - Starting...
+
+!!!!!Cumulative Bandwidth to be computed from all the devices !!!!!!
+
+Running on...
+
+ Device 0: NVIDIA GeForce GTX 1080 Ti
+ Device 1: NVIDIA GeForce GTX 1080 Ti
+ Device 2: NVIDIA GeForce GTX 1080 Ti
+ Device 3: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+ Host to Device Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			2145.8
+
+ Device to Host Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			1585.6
+
+ Device to Device Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			1364080.8
+
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+[CUDA Bandwidth Test] - Starting...
+
+!!!!!Cumulative Bandwidth to be computed from all the devices !!!!!!
+
+Running on...
+
+ Device 0: NVIDIA GeForce GTX 1080 Ti
+ Device 1: NVIDIA GeForce GTX 1080 Ti
+ Device 2: NVIDIA GeForce GTX 1080 Ti
+ Device 3: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+ Host to Device Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			2131.8
+
+ Device to Host Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			1585.5
+
+ Device to Device Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			1140093.4
+
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+[CUDA Bandwidth Test] - Starting...
+
+!!!!!Cumulative Bandwidth to be computed from all the devices !!!!!!
+
+Running on...
+
+ Device 0: NVIDIA GeForce GTX 1080 Ti
+ Device 1: NVIDIA GeForce GTX 1080 Ti
+ Device 2: NVIDIA GeForce GTX 1080 Ti
+ Device 3: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+ Host to Device Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			2124.3
+
+ Device to Host Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			1565.6
+
+ Device to Device Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			1005505.2
+
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+[CUDA Bandwidth Test] - Starting...
+
+!!!!!Cumulative Bandwidth to be computed from all the devices !!!!!!
+
+Running on...
+
+ Device 0: NVIDIA GeForce GTX 1080 Ti
+ Device 1: NVIDIA GeForce GTX 1080 Ti
+ Device 2: NVIDIA GeForce GTX 1080 Ti
+ Device 3: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+ Host to Device Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			2082.4
+
+ Device to Host Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			1575.3
+
+ Device to Device Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			1189163.3
+
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+[CUDA Bandwidth Test] - Starting...
+
+!!!!!Cumulative Bandwidth to be computed from all the devices !!!!!!
+
+Running on...
+
+ Device 0: NVIDIA GeForce GTX 1080 Ti
+ Device 1: NVIDIA GeForce GTX 1080 Ti
+ Device 2: NVIDIA GeForce GTX 1080 Ti
+ Device 3: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+ Host to Device Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			2101.7
+
+ Device to Host Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			1568.3
+
+ Device to Device Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			1335534.6
+
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+[CUDA Bandwidth Test] - Starting...
+
+!!!!!Cumulative Bandwidth to be computed from all the devices !!!!!!
+
+Running on...
+
+ Device 0: NVIDIA GeForce GTX 1080 Ti
+ Device 1: NVIDIA GeForce GTX 1080 Ti
+ Device 2: NVIDIA GeForce GTX 1080 Ti
+ Device 3: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+ Host to Device Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			2095.7
+
+ Device to Host Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			1553.5
+
+ Device to Device Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			1182536.6
+
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+[CUDA Bandwidth Test] - Starting...
+
+!!!!!Cumulative Bandwidth to be computed from all the devices !!!!!!
+
+Running on...
+
+ Device 0: NVIDIA GeForce GTX 1080 Ti
+ Device 1: NVIDIA GeForce GTX 1080 Ti
+ Device 2: NVIDIA GeForce GTX 1080 Ti
+ Device 3: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+ Host to Device Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			2110.7
+
+ Device to Host Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			1528.6
+
+ Device to Device Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			1202327.4
+
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+[CUDA Bandwidth Test] - Starting...
+
+!!!!!Cumulative Bandwidth to be computed from all the devices !!!!!!
+
+Running on...
+
+ Device 0: NVIDIA GeForce GTX 1080 Ti
+ Device 1: NVIDIA GeForce GTX 1080 Ti
+ Device 2: NVIDIA GeForce GTX 1080 Ti
+ Device 3: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+ Host to Device Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			2078.6
+
+ Device to Host Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			1517.2
+
+ Device to Device Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			1137707.6
+
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+[CUDA Bandwidth Test] - Starting...
+
+!!!!!Cumulative Bandwidth to be computed from all the devices !!!!!!
+
+Running on...
+
+ Device 0: NVIDIA GeForce GTX 1080 Ti
+ Device 1: NVIDIA GeForce GTX 1080 Ti
+ Device 2: NVIDIA GeForce GTX 1080 Ti
+ Device 3: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+ Host to Device Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			2058.3
+
+ Device to Host Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			1510.0
+
+ Device to Device Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			1146927.2
+
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+[CUDA Bandwidth Test] - Starting...
+
+!!!!!Cumulative Bandwidth to be computed from all the devices !!!!!!
+
+Running on...
+
+ Device 0: NVIDIA GeForce GTX 1080 Ti
+ Device 1: NVIDIA GeForce GTX 1080 Ti
+ Device 2: NVIDIA GeForce GTX 1080 Ti
+ Device 3: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+ Host to Device Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			2057.7
+
+ Device to Host Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			1526.3
+
+ Device to Device Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			1171061.1
+
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+[CUDA Bandwidth Test] - Starting...
+
+!!!!!Cumulative Bandwidth to be computed from all the devices !!!!!!
+
+Running on...
+
+ Device 0: NVIDIA GeForce GTX 1080 Ti
+ Device 1: NVIDIA GeForce GTX 1080 Ti
+ Device 2: NVIDIA GeForce GTX 1080 Ti
+ Device 3: NVIDIA GeForce GTX 1080 Ti
+ Quick Mode
+
+ Host to Device Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			2038.4
+
+ Device to Host Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			1520.3
+
+ Device to Device Bandwidth, 4 Device(s)
+ PINNED Memory Transfers
+   Transfer Size (Bytes)	Bandwidth(MB/s)
+   33554432			1334708.8
+
+Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
